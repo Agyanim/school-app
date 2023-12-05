@@ -2,12 +2,12 @@
 ## Api Section
 ### Entities
 1. auth
-    * signup endpoint
+    * signUp endpoint
     * login endpoint
     * reset password endpoint
     * change password endpoint
 2. users
-    * add user enepoint
+    * add user endpoint
     * update user endpoint
     * get user endpoint
     * delete user endpoint
