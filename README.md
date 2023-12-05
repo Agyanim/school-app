@@ -1,5 +1,5 @@
 # School Management app
 ## Api Section
 ### Entities
-* auth
-* user
+1. auth
+2. user
