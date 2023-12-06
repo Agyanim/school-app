@@ -3,7 +3,7 @@ import conn from "../../../../db/pgConnection"
 
 export const GET=async(request:NextRequest)=>{
     try {
-        const result= await conn.query("SELECT * FROM public.note_tbl")
+        const result= await conn.query("SELECT * FROM public.studentTable")
         console.log(result.rows);
         
         return NextResponse.json({
