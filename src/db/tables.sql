@@ -1,11 +1,15 @@
 -- School Management app
 
 -- *************************************************
-
-
 -- creating db
 CREATE DATABASE school_management_db;
 
+-- deleting tables 
+DROP TABLE IF EXISTS userTable;
+DROP TABLE IF EXISTS guidienTable;
+DROP TABLE IF EXISTS studentTable;
+DROP TABLE IF EXISTS employmentDetail;
+DROP TABLE IF EXISTS staffTable;
 -- creating tables
 -- user talbe
 CREATE TABLE userTable (
@@ -32,3 +36,34 @@ CREATE TABLE studentTable (
 )
 
 -- guidien table
+CREATE TABLE guidienTable(
+    guidienId BIGSERIAL PRIMARY KEY,
+    studentId INT REFERENCES studentTable(studentId),
+    firstName VARCHAR(255) NOT NULL,
+    lastName VARCHAR(255) NOT NULL,
+    address VARCHAR(255) NOT null,
+    phone1 VARCHAR(100),
+    phone2 VARCHAR(100),
+    email VARCHAR(100),
+    relation VARCHAR(100) DEFAULT 'Father'
+)
+
+-- staff table
+CREATE TABLE staffTable(
+    staffId BIGSERIAL PRIMARY KEY ,
+    firstName VARCHAR(255) NOT NULL,
+    lastName VARCHAR(255) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    phone1 VARCHAR(100),
+    phone2 VARCHAR(100),
+    qualification VARCHAR(255) NOT NULL
+)
+
+-- employment details
+CREATE TABLE employmentDetail(
+    employmentId BIGSERIAL PRIMARY KEY,
+    staffId INT REFERENCES staffTable(staffId),
+    dateEmployed DATE NOT NULL,
+    employmentType VARCHAR(255) DEFAULT 'Permanent' NOT NULL,
+    contractDuration DATE
+)
