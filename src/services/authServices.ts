@@ -8,3 +8,4 @@ export const createUser= async({userName,password}:AuthType)=>{
      await conn.query(sql,values)
     return await conn.query(select)
 }
+

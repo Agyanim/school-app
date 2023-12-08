@@ -6,7 +6,7 @@ export const POST=async(request:NextRequest)=>{
         const data=await request.json()
         const result=await createUser(data)
         
-        return NextResponse.json({success:true,result:result.rows})
+        return NextResponse.json({success:true,result:result.rows[result.rows.length-1]})
     } catch (error:any) {
         return NextResponse.json({error:error.message})
         
