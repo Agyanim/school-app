@@ -67,3 +67,4 @@ CREATE TABLE employmentDetail(
     employmentType VARCHAR(255) DEFAULT 'Permanent' NOT NULL,
     contractDuration DATE
 )
+-- SELECT * FROM userTable WHERE userid=10
