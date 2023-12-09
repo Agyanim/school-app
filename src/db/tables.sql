@@ -28,7 +28,7 @@ CREATE TABLE studentTable (
     dateOfBirth DATE,
     placeOfBirth VARCHAR(255),
     hometown VARCHAR(255),
-    address VARCHAR(255) NOT NULL,
+    address1 VARCHAR(255) NOT NULL,
     primaryLanguage VARCHAR(255) NOT NULL,
     secondaryLanguage VARCHAR(255),
     className VARCHAR(255) NOT NULL,
@@ -41,11 +41,11 @@ CREATE TABLE guidienTable(
     studentId INT REFERENCES studentTable(studentId),
     firstName VARCHAR(255) NOT NULL,
     lastName VARCHAR(255) NOT NULL,
-    address VARCHAR(255) NOT null,
-    phone1 VARCHAR(100),
+    address1 VARCHAR(255) NOT NULL,
+    phone1 VARCHAR(100) NOT NULL,
     phone2 VARCHAR(100),
     email VARCHAR(100),
-    relation VARCHAR(100) DEFAULT 'Father'
+    relation VARCHAR(100) NOT NULL
 )
 
 -- staff table
@@ -53,7 +53,7 @@ CREATE TABLE staffTable(
     staffId BIGSERIAL PRIMARY KEY ,
     firstName VARCHAR(255) NOT NULL,
     lastName VARCHAR(255) NOT NULL,
-    address VARCHAR(255) NOT NULL,
+    address1 VARCHAR(255) NOT NULL,
     phone1 VARCHAR(100),
     phone2 VARCHAR(100),
     qualification VARCHAR(255) NOT NULL
@@ -68,3 +68,6 @@ CREATE TABLE employmentDetail(
     contractDuration DATE
 )
 -- SELECT * FROM userTable WHERE userid=10
+
+
+    

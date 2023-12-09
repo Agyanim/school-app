@@ -5,12 +5,14 @@ import { getUserByName } from "@/services/userServices";
 // login enpoint
 export const POST = async (request: NextRequest) => {
   try {
-    const { userName, password } = await request.json();
+    let { userName, password } = await request.json();
 
     // checking if username and password are provided
     if (!userName || !password) {
       return NextResponse.json("Username and password are required");
     }
+    userName=userName.toLowerCase()
+    
     // fetching user using using name
     const user = await getUserByName(userName);
     // checking if username exist
