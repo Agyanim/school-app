@@ -11,14 +11,14 @@ export const POST=async(request:NextRequest)=>{
         userName=userName.toLowerCase()
         
         const existingUser=await getUserByName(userName)
-        if(existingUser[0]){
+        if(existingUser){
             return NextResponse.json("username already taken.")
         }
         const encodePassword= hashPassword(password)
         
         const user=await createUser([userName,encodePassword])
         
-        return NextResponse.json({success:true, message:"User created successfully.",user:user[user.length-1]})
+        return NextResponse.json({success:true, message:"User created successfully.",user})
     } catch (error:any) {
         return NextResponse.json({error:error.message})
         

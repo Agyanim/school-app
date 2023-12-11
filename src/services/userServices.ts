@@ -1,4 +1,3 @@
-import conn from "@/db/pgConnection"
 import { selectByIdFunction, selectFunction, selectByNameFunction, deleteByIdFunction, updateFunction, insertFunction } from "@/db/sqlFunctions"
 
 // creating a user
