@@ -11,11 +11,11 @@ interface DataType {
 }
 const Notify = () => {
 
-  const { data, error, isSuccess, isLoading } = useQuery({
-    queryKey: ["user"],
+  const { data, isLoading } = useQuery({
+    queryKey: ["users"],
     queryFn: async () => {
-      const user = await getUser();
-      return user as DataType[];
+      const {users} = await getUser();      
+      return users as DataType[];
     },
   });
 
@@ -28,8 +28,10 @@ const Notify = () => {
     );
   });
 
-  isSuccess && toast.success("success");
-  isLoading && <p>Loading...</p>;
+  if (isLoading){
+    return <p>Loading...</p>;
+  }
+  
   return (
     <section className="flex justify-center items-center h-full">
       <div className="mt-[1rem]">
@@ -40,8 +42,9 @@ const Notify = () => {
             toast.info("Notification")
           }}
         >
-         {render}
+          Notify
         </button>
+         {render}
       </div>
     </section>
   );

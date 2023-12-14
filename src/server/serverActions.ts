@@ -5,8 +5,9 @@ import { toast } from "sonner"
 
 export const getUser= async()=>{
     try {
-        const userData= await getRequest("user/")
-        return userData
+        const data= await getRequest("user/")
+        toast.success("Success")
+        return data
     } catch (error:any) {
         toast.error(error.message)
     }
