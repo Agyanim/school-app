@@ -11,7 +11,7 @@ interface DataType {
 }
 const Notify = () => {
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading} = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const {users} = await getUser();      

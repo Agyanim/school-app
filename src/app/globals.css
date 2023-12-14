@@ -2,3 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.pri{
+@apply bg-blue-800
+}
