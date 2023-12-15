@@ -1,10 +1,16 @@
 "use client";
 import React from "react";
 import { PrimaryButton } from ".";
+import { useForm } from "react-hook-form";
 
 const SignUpForm = () => {
+  const {register,handleSubmit,formState:{errors},reset,}=useForm({
+    
+  })
   const OnClickHandler = (e:any) => {
     e.preventDefault()
+    console.log("hello");
+    
   };
   return (
     <form className="flex flex-col items-center w-[40%] ">
@@ -18,6 +24,7 @@ const SignUpForm = () => {
             type="text"
             placeholder="User Name"
             name="userName"
+            value={...register("userName")}
           />
         </div>
         <div className="flex flex-col mb-5">

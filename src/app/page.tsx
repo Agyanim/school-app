@@ -1,4 +1,4 @@
-import { getRequest } from "@/axios-handlers/axiosUserHandler";
+import { getRequest } from "@/axios-handlers/axiosHandler";
 
 export default async function Home() {
 	const response = await getRequest("user/");
