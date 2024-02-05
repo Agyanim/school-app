@@ -2,18 +2,29 @@
 import React from "react";
 import { PrimaryButton } from ".";
 import { useForm } from "react-hook-form";
+import { axiosInstance } from "@/axios-handlers";
+import { toast } from "sonner";
+
 
 const SignUpForm = () => {
-  const {register,handleSubmit,formState:{errors},reset,}=useForm({
+  const {register,handleSubmit,formState:{errors},reset,}=useForm<UserType>({
     
   })
-  const OnClickHandler = (e:any) => {
-    e.preventDefault()
-    console.log("hello");
+
+  const onClickHandler= async (data:UserType)=>{
+   try {
+      const response= await axiosInstance.post("auth/signup",data)
+      toast.success(response.data.message)
+      
+      
+    } catch (error:any) {
+      toast.error(error.message)
+    }
     
-  };
+
+  }
   return (
-    <form className="flex flex-col items-center w-[40%] ">
+    <form className="flex flex-col items-center w-[40%] " onSubmit={handleSubmit(onClickHandler)}>
       <section className="w-full">
         <div className="flex flex-col mb-5">
           <label className="mb-2" htmlFor="userName">
@@ -23,8 +34,7 @@ const SignUpForm = () => {
             className="px-2 py-3 rounded"
             type="text"
             placeholder="User Name"
-            name="userName"
-            value={...register("userName")}
+            {...register("userName")}
           />
         </div>
         <div className="flex flex-col mb-5">
@@ -34,8 +44,8 @@ const SignUpForm = () => {
           <input
             className="px-2 py-3 rounded"
             type="Password"
-            name="password"
             placeholder="password"
+            {...register("password")}
           />
         </div>
       </section>
@@ -44,7 +54,6 @@ const SignUpForm = () => {
           Text={"Submit"}
           BackgroundColor={"blue"}
           Color={"white"}
-          OnClickHandler={OnClickHandler}
         />
       </div>
     </form>
