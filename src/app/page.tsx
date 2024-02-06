@@ -1,18 +1,10 @@
-import { getRequest } from "@/axios-handlers/axiosHandler";
+import { NavigationBar } from "@/components/client";
 
 export default async function Home() {
-	const response = await getRequest("user/");
-	const render = response.users?.map((user: any) => {
-		return (
-			<p
-				key={user?.userid}
-			>{`userid : ${user.userid} UserName : ${user.username}`}</p>
-		);
-	});
+	
 	return (
 		<main>
-			<h1>The School App</h1>
-			{render}	
+			<h1 className="">The School App</h1>
 		</main>
 	);
 }

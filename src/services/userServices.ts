@@ -1,6 +1,9 @@
 import { selectByIdFunction, selectFunction, selectByNameFunction, deleteByIdFunction, updateFunction, insertFunction } from "@/db/sqlFunctions"
-
+import { PrismaClient } from "@prisma/client";
 // creating a user
+
+const prismaClient=new PrismaClient()
+
 export const createUser=async(values:(any)[])=>{
     const sql = `
     INSERT INTO
@@ -14,13 +17,21 @@ export const createUser=async(values:(any)[])=>{
 }
 // feching all users service/controller
 export const getUsers=async()=>{
-    const sql="SELECT userId,userName FROM userTable"
-    return await selectFunction(sql) 
+    const users= await prismaClient.user.findMany()
+    // const sql="SELECT userId,userName FROM userTable"
+    // return await selectFunction(sql) 
+    return users
 }
 // fetching user using user  id
 export const getUserById=async(userId:number)=>{
-    const sql=`SELECT userId,userName FROM userTable WHERE userid=$1`
-    return await selectByIdFunction(sql,userId)
+    const user= await prismaClient.user.findUnique({
+        where:{
+            id:userId
+        }
+    })
+    return user
+    // const sql=`SELECT userId,userName FROM userTable WHERE userid=$1`
+    // return await selectByIdFunction(sql,userId)
 
 }
 // fetching user using username
