@@ -7,18 +7,37 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")  
+  url      = env("DATABASE_URL")
 }
 
-model Test{
-  id Int @id @default(autoincrement())
+model Test {
+  id    Int @id @default(autoincrement())
   score Int
 }
 
-model User{
-  id Int @id @default(autoincrement())
-  firstName String
-  lastName String
-  email String
-  phone String
+model Post {
+  id          Int     @id @default(autoincrement())
+  title       String
+  content     String?
+  publisheded Boolean @default(false)
+  author      User?   @relation(fields: [authorId], references: [id])
+  authorId    Int?
+}
+
+model User {
+  id       Int       @id @default(autoincrement())
+  userName String
+  email    String    @unique
+  posts    Post[]
+  Profile  Profile[]
+}
+
+model Profile {
+  id        Int     @id @default(autoincrement())
+  firstName String?
+  lastName  String?
+  phone     String?
+  imageUrl  String?
+  user      User?   @relation(fields: [userId], references: [id])
+  userId    Int
 }
