@@ -1,9 +1,11 @@
-/*
-  Warnings:
+-- CreateTable
+CREATE TABLE "Test" (
+    "id" SERIAL NOT NULL,
+    "score" INTEGER NOT NULL,
 
-  - A unique constraint covering the columns `[email]` on the table `User` will be added. If there are existing duplicate values, this will fail.
+    CONSTRAINT "Test_pkey" PRIMARY KEY ("id")
+);
 
-*/
 -- CreateTable
 CREATE TABLE "Post" (
     "id" SERIAL NOT NULL,
@@ -11,8 +13,19 @@ CREATE TABLE "Post" (
     "content" TEXT,
     "publisheded" BOOLEAN NOT NULL DEFAULT false,
     "authorId" INTEGER,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Post_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "User" (
+    "id" SERIAL NOT NULL,
+    "userName" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable

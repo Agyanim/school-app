@@ -19,12 +19,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body  className={inter.className}>
         <Providers>
-          <NavigationBar></NavigationBar>
+          <NavigationBar />
           {children}
           <Toaster richColors position="top-right" />
-          <ReactQueryDevtools/>
+          <ReactQueryDevtools />
         </Providers>
       </body>
     </html>

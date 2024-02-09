@@ -5,8 +5,8 @@ interface typeProp{
 }
 export const SecondaryButtonComponent = ({Text}:typeProp) => {
   return (
-    <div className='w-[60%] mx-auto'>
-        <button className='bg-blue-500 text-white px-5 py-2 w-full'>{Text}</button>
+    <div className='w-full mx-auto'>
+        <button className='bg-gradient-to-r from-pink-600 to-orange-600 hover:bg-gradient-to-l  font-bold text-white px-5 py-2 w-full rounded'>{Text}</button>
     </div>
   )
 }
