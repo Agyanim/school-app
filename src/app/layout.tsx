@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "sonner";
 import { Providers } from "@/providers/Providers";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { NavigationBar } from "@/components/client";
 
 const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
@@ -18,11 +19,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body  className={inter.className}>
         <Providers>
+          <NavigationBar />
           {children}
           <Toaster richColors position="top-right" />
-          <ReactQueryDevtools/>
+          <ReactQueryDevtools />
         </Providers>
       </body>
     </html>

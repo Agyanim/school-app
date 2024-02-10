@@ -1,18 +1,15 @@
-import { getRequest } from "@/axios-handlers/axiosHandler";
-
+import Image from "next/image";
+import Hero from "../../public/images/student.jpg"
 export default async function Home() {
-	const response = await getRequest("user/");
-	const render = response.users?.map((user: any) => {
-		return (
-			<p
-				key={user?.userid}
-			>{`userid : ${user.userid} UserName : ${user.username}`}</p>
-		);
-	});
+	
 	return (
-		<main>
-			<h1>The School App</h1>
-			{render}	
+		<main className=" h-screen lg:h-[80vh] w-screen relative">
+			<section className="h-full ">
+				<div className="rounded">
+					<Image className="w-full h-full rounded" src={Hero} alt="hero"  fill={true} objectFit="cover" />
+				</div>
+			</section>
+			
 		</main>
 	);
 }

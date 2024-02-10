@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { validatePassword } from "@/util/password";
 import { getUserByName } from "@/services/userServices";
+import { NextApiRequest } from "next";
 
 // login enpoint
-export const POST = async (request: NextRequest) => {
+export const POST = async (request: NextApiRequest) => {
   try {
-    let { userName, password } = await request.json();
+    let { userName, password } = await request.body;
 
     // checking if username and password are provided
     if (!userName || !password) {

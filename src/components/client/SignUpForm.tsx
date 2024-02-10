@@ -1,71 +1,89 @@
 "use client";
-import React from "react";
-import { PrimaryButton } from ".";
+import React, { useRef } from "react";
+import { SecondaryButtonComponent } from ".";
 import { useForm } from "react-hook-form";
 import { axiosInstance } from "@/axios-handlers";
 import { toast } from "sonner";
 
+const SignUpForm:React.FC = () => {
+const confirmPassErr = useRef(null)
 
-const SignUpForm = () => {
-  const {register,handleSubmit,formState:{errors},reset,}=useForm<UserType>({
-    defaultValues:{
-      userName:"",
-      password:""
-    }
-  })
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<CreateAccountType>({});
 
-  const onClickHandler= async (data:UserType)=>{
-   try {
-      const response= await axiosInstance.post("auth/signup",data)
-      if (!response.data.user){
-        return toast.info(response.data.message)
+  const onClickHandler = async (data: CreateAccountType) => {
+    try {
+      const {password,confirmPassword}=data
+      if(password !== confirmPassword){
+        confirmPassErr.current.textContent="Password do not match"
       }
-      toast.success(response.data.message)
-      reset()
-    } catch (error:any) {
-      toast.error(error.message)
+      else{
+        confirmPassErr.current.textContent=""
+        const response = await axiosInstance.post("/auth/signup", data);
+        toast.success(response.data.message);
+      }
+    } catch (error: any) {
+      // toast.error(error.message);
     }
-    
+  };
 
-  }
+
   return (
-    <form className="flex flex-col items-center w-[40%] " onSubmit={handleSubmit(onClickHandler)} noValidate>
-      <section className="w-full">
-        <div className="flex flex-col mb-5">
-          <label className="mb-2" htmlFor="userName">
-            User Name:
+    <form
+      className="flex w-[90%] flex-col lg:w-[30%] mx-h-[31.25rem] h-[31.25rem] justify-center mb-[-1rem]"
+      noValidate
+      onSubmit={handleSubmit(onClickHandler)}
+    >
+      <section className="border border-orange-500 mb-10 p-5 rounded-md shadow shadow-pink-500/50">
+        <div className="flex flex-col mb-5 relative">
+          <label className="mb-2 text-orange-700 font-bold" htmlFor="email">
+            Email:
           </label>
           <input
-            className="px-2 py-3 rounded"
+            className="px-2 py-3 rounded  border border-orange-400/40"
             type="text"
-            placeholder="User Name"
-            {...register("userName",{
-              required:"userName is required"
-            }) }
-            
+            placeholder="Enter user name or email"
+            {...register("email", { required: "User field is required" })}
           />
-          <p className="pl-2 mt-2 text-sm text-red-600">{errors.userName?.message}</p>
+          <p className="text-red-500  text-sm absolute -bottom-5 left-1">{errors.email ? errors.email.message : ""}</p>
         </div>
-        <div className="flex flex-col mb-5">
-          <label className="mb-2" htmlFor="password">
+
+        <div className="flex flex-col mb-5 relative">
+          <label className="mb-2 text-orange-700 font-bold" htmlFor="password">
             Password:
           </label>
+
           <input
-            className="px-2 py-3 rounded"
+            className="px-2 py-3 rounded border border-orange-400/40"
             type="Password"
             placeholder="password"
-            {...register("password",{required:"password is required"})}
+            {...register("password", {
+              required: "Password field cannot be empty",
+            })}
           />
-          <p className="pl-2 mt-2 text-sm text-red-600">{errors.password?.message}</p>
-        </div>
+          <p className="text-red-500  text-sm absolute -bottom-5 left-1">{errors.password ? errors.password.message : ""}</p>
+          </div>
+          <div className="flex flex-col mb-5 relative">
+          <label className="mb-2 text-orange-700 font-bold" htmlFor="password">
+            Conform password:
+          </label>
+
+          <input 
+            className="px-2 py-3 rounded border border-orange-400/40"
+            type="Password"
+            placeholder="password"
+            {...register("confirmPassword", {
+              required: "Password field cannot be empty",
+            })}
+          />
+      <p ref={confirmPassErr} className="text-red-500  text-sm absolute -bottom-5 left-1"></p>
+          </div>
       </section>
-      <div>
-        <PrimaryButton
-          Text={"Submit"}
-          BackgroundColor={"blue"}
-          Color={"white"}
-        />
-      </div>
+      <SecondaryButtonComponent Text="Submit" />
     </form>
   );
 };

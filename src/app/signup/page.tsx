@@ -1,14 +1,19 @@
-import { SignUpForm } from '@/components/client'
-import React from 'react'
+import { SignUpForm } from "@/components/client";
+import Link from "next/link";
+import React from "react";
 
-
-const page = () => {
-
+const SingUpPage = () => {
   return (
-    <main className='flex justify-center items-center bg-blue-100 h-screen'>
-        <SignUpForm/>
+    <main className="flex justify-center items-center w-screen flex-col max-h-[30rem]">
+      <SignUpForm />
+      <p className="ml-[-13%]">
+        Already have an account?
+        <span className="pl-2 italic text-orange-900 font-bold">
+          <Link href="/signin">signin</Link>
+        </span>
+      </p>
     </main>
-  )
-}
+  );
+};
 
-export default page
+export default SingUpPage;

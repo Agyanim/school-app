@@ -2,8 +2,10 @@ import { deleteUserById, getUserById, updateUserById } from "@/services/userServ
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET=async(request:NextRequest,{params}:any)=>{
+   console.log("user id")
+
    const {userId}=params
-   const user=await getUserById(userId)
+   const user=await getUserById(parseInt(userId))
    return NextResponse.json({success:true,user})
    
 }
