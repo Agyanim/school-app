@@ -4,6 +4,9 @@ import { SecondaryButtonComponent } from ".";
 import { useForm } from "react-hook-form";
 import { axiosInstance } from "@/axios-handlers";
 import { toast } from "sonner";
+import { signUpSchemaType } from "@/type";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { signUpSchema } from "@/util/zod";
 
 const SignUpForm = () => {
   const {
@@ -11,9 +14,11 @@ const SignUpForm = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<UserType>({});
+  } = useForm<signUpSchemaType>({
+    resolver:zodResolver(signUpSchema)
+  });
 
-  const onClickHandler = async (data: UserType) => {
+  const onClickHandler = async (data: signUpSchemaType) => {
     try {
       const response = await axiosInstance.post("auth/signup", data);
       toast.success(response.data.message);
@@ -36,9 +41,10 @@ const SignUpForm = () => {
             className="px-2 py-3 rounded  border border-orange-400/40"
             type="text"
             placeholder="Enter user name or email"
-            {...register("user", { required: "User field is required" })}
+            {...register("email")}
           />
-          <p className="text-red-500  text-sm absolute left-1 -bottom-5">{errors.user ? errors.user.message : ""}</p>
+          {errors.email && <p className="text-red-500  text-sm absolute left-1 -bottom-5">{ errors.email.message}</p>}
+          
         </div>
 
         <div className="flex flex-col mb-5 relative">
@@ -50,11 +56,11 @@ const SignUpForm = () => {
             className="px-2 py-3 rounded border border-orange-400/40"
             type="Password"
             placeholder="password"
-            {...register("password", {
-              required: "Password field cannot be empty",
-            })}
+            {...register("password")}
           />
-          <p className="text-red-500  text-sm absolute left-1 -bottom-5">{errors.password ? errors.password.message : ""}</p>
+          { errors.password && <p className="text-red-500  text-sm absolute left-1 -bottom-5">{ 
+          errors.password.message}</p>
+}
         </div>
       </section>
       <SecondaryButtonComponent Text="Submit" />

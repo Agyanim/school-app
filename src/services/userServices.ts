@@ -17,6 +17,14 @@ export const createUser = async (values: any) => {
     })
   return user;
 };
+export const createUserProfile = async (userId: number) => {
+    const userProfile= await prismaClient.profile.create({
+        data:{
+          userId:userId
+        }
+    })
+  return userProfile;
+};
 // feching all users service/controller
 export const getUsers = async () => {
   const users = await prismaClient.user.findMany();

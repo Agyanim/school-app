@@ -1,4 +1,4 @@
-import { createUser, getUserByEmail, getUserByName } from "@/services/userServices";
+import { createUser, createUserProfile, getUserByEmail, getUserByName } from "@/services/userServices";
 import { hashPassword } from "@/util/password";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -23,9 +23,13 @@ export const POST=async(request:NextRequest)=>{
             email:email,
             password:encodePassword
         }
-        const user=await createUser(value)   
-        const {password:newPassword,...rest}=user
-             
+        const user=await createUser(value)  
+        console.log(user.id);
+        const userProfile= await createUserProfile(user.id)
+        
+        console.log(userProfile);
+        
+        const {password:newPassword,...rest}=user   
         return NextResponse.json({success:true, message:"User created successfully.",user:rest},{status:200})
     } catch (error:any) {
         return NextResponse.json({error:error.message})
