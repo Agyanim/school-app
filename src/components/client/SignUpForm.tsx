@@ -1,12 +1,12 @@
 "use client";
-import React, { useRef } from "react";
+import React, {  RefObject,  useRef } from "react";
 import { SecondaryButtonComponent } from ".";
 import { useForm } from "react-hook-form";
 import { axiosInstance } from "@/axios-handlers";
 import { toast } from "sonner";
 
 const SignUpForm:React.FC = () => {
-const confirmPassErr = useRef(null)
+const confirmPassErr:RefObject<HTMLParagraphElement | null> = useRef(null)
 
   const {
     register,
@@ -19,11 +19,12 @@ const confirmPassErr = useRef(null)
     try {
       const {password,confirmPassword}=data
       if(password !== confirmPassword){
-        confirmPassErr.current.textContent="Password do not match"
+        confirmPassErr.current!.textContent="Password do not match"
       }
       else{
-        confirmPassErr.current.textContent=""
-        const response = await axiosInstance.post("/auth/signup", data);
+        confirmPassErr.current!.textContent=""
+        reset()
+        const response = await axiosInstance.post("/auth/signup", data)       
         toast.success(response.data.message);
       }
     } catch (error: any) {

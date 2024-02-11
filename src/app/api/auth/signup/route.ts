@@ -10,11 +10,11 @@ export const POST=async(request:NextRequest)=>{
             return NextResponse.json({message:"UserName and password must be provided!"})
         }
         
-        const existingUser=await getUserByEmail(email)
-        // console.log(existingUser);
-        
-        if(existingUser!=null){
-            return NextResponse.json({message:"username already taken."})
+        const existingUser=await getUserByEmail(email)        
+        if(existingUser){
+            console.log("empty");
+            
+            return  NextResponse.json({message:"username already taken."})
         }
 
         const encodePassword= hashPassword(password)
@@ -23,13 +23,10 @@ export const POST=async(request:NextRequest)=>{
             email:email,
             password:encodePassword
         }
-        
-        console.log(value);
-        
-        const user=await createUser(value)
-        // console.log(user);
-        
-        return NextResponse.json({success:true, message:"User created successfully.",user})
+        const user=await createUser(value)   
+        const {password:newPassword,...rest}=user
+             
+        return NextResponse.json({success:true, message:"User created successfully.",user:rest},{status:200})
     } catch (error:any) {
         return NextResponse.json({error:error.message})
         
