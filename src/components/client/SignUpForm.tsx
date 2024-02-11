@@ -37,23 +37,23 @@ const SignUpForm: React.FC = () => {
 
 	return (
 		<form
-			className="flex w-[90%] flex-col lg:w-[30%] mx-h-[31.25rem] h-[31.25rem] justify-center mb-[-1rem]"
+			className="flex w-[90%] flex-col lg:w-[30%] mx-h-[31.25rem] h-[31.25rem] justify-center -mb-12"
 			noValidate
 			onSubmit={handleSubmit(onClickHandler)}
 		>
-			<section className="border border-orange-500 mb-10 p-5 rounded-md shadow shadow-pink-500/50">
+			<section className="border border-gray-500/10 mb-10 p-5 rounded-md shadow shadow-pink-500/50 flex flex-col gap-2">
 				<div className="flex flex-col mb-5 relative">
 					<label className="mb-2 text-orange-700 font-bold" htmlFor="email">
 						Email:
 					</label>
 					<input
-						className="px-2 py-3 rounded  border border-orange-400/40"
+						className="px-2 py-1 rounded  border border-gray-400/40"
 						type="text"
 						placeholder="Enter user name or email"
 						{...register("email")}
 					/>
 					{errors.email && (
-						<p className="text-red-500  text-sm absolute -bottom-5 left-1">
+						<p className="text-red-500/70  text-sm absolute -bottom-5 left-1 italic">
 							{errors.email.message}
 						</p>
 					)}
@@ -65,13 +65,13 @@ const SignUpForm: React.FC = () => {
 					</label>
 
 					<input
-						className="px-2 py-3 rounded border border-orange-400/40"
+						className="px-2 py-1 rounded border border-gray-400/40"
 						type="Password"
 						placeholder="password"
 						{...register("password")}
 					/>
 					{errors.password && (
-						<p className="text-red-500  text-sm absolute -bottom-5 left-1">
+						<p className="text-red-500/70  text-sm absolute -bottom-5 left-1 italic">
 							{errors.password.message}
 						</p>
 					)}
@@ -82,21 +82,19 @@ const SignUpForm: React.FC = () => {
 					</label>
 
 					<input
-						className="px-2 py-3 rounded border border-orange-400/40"
+						className="px-2 py-1 rounded border border-gray-400/40"
 						type="Password"
 						placeholder="password"
-						{...register("confirmPassword", {
-							required: "Password field cannot be empty",
-						})}
+						{...register("confirmPassword")}
 					/>
 					{passwordMatch && (
-						<p className="text-red-500  text-sm absolute -bottom-5 left-1">
+						<p className="text-red-500/50  text-sm absolute -bottom-5 left-1">
 							Password do not match
 						</p>
 					)}
 				</div>
 			</section>
-			<SecondaryButtonComponent Text="Submit" />
+			<SecondaryButtonComponent Text="Create account" />
 		</form>
 	);
 };

@@ -32,18 +32,18 @@ const SignUpForm = () => {
       noValidate
       onSubmit={handleSubmit(onClickHandler)}
     >
-      <section className="border border-orange-500 mb-10 p-5 rounded-md shadow shadow-pink-500/50">
+      <section className="border border-orange-500/10 mb-10 p-5 rounded-md shadow shadow-pink-500/50 flex flex-col gap-2">
         <div className="flex flex-col mb-5  relative">
           <label className="mb-2 text-orange-700 font-bold" htmlFor="userName">
             Email:
           </label>
           <input
-            className="px-2 py-3 rounded  border border-orange-400/40"
+            className="px-2 py-1 rounded  border border-orange-400/40"
             type="text"
             placeholder="Enter user name or email"
             {...register("email")}
           />
-          {errors.email && <p className="text-red-500  text-sm absolute left-1 -bottom-5">{ errors.email.message}</p>}
+          {errors.email && <p className="text-red-500/50  text-sm absolute left-1 -bottom-5 italic">{ errors.email.message}</p>}
           
         </div>
 
@@ -53,17 +53,17 @@ const SignUpForm = () => {
           </label>
 
           <input
-            className="px-2 py-3 rounded border border-orange-400/40"
+            className="px-2 py-1 rounded border border-orange-400/40"
             type="Password"
             placeholder="password"
             {...register("password")}
           />
-          { errors.password && <p className="text-red-500  text-sm absolute left-1 -bottom-5">{ 
+          { errors.password && <p className="text-red-500/50  text-sm absolute left-1 -bottom-5">{ 
           errors.password.message}</p>
 }
         </div>
       </section>
-      <SecondaryButtonComponent Text="Submit" />
+      <SecondaryButtonComponent Text="Login" />
     </form>
   );
 };
