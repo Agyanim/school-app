@@ -4,24 +4,31 @@ import { SecondaryButtonComponent } from ".";
 import { useForm } from "react-hook-form";
 import { axiosInstance } from "@/axios-handlers";
 import { toast } from "sonner";
-import { signUpSchemaType } from "@/type";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signUpSchema } from "@/util/zod";
+import { signInSchema, signInSchemaType } from "@/util/zod";
+import { useRouter } from "next/navigation";
 
-const SignUpForm = () => {
+const SignInForm = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<signUpSchemaType>({
-    resolver:zodResolver(signUpSchema)
+  } = useForm<signInSchemaType>({
+    resolver: zodResolver(signInSchema),
   });
 
-  const onClickHandler = async (data: signUpSchemaType) => {
+  const onClickHandler = async (data: signInSchemaType) => {
     try {
-      const response = await axiosInstance.post("auth/signup", data);
-      toast.success(response.data.message);
+      const response = await axiosInstance.post("auth/login", data);
+      if (!response.data.user) {
+        toast.error(response.data.message);
+      } else {
+        toast.success(response.data.message);
+        console.log(data);
+        router.push("/");
+      }
     } catch (error: any) {
       toast.error(error.message);
     }
@@ -43,8 +50,11 @@ const SignUpForm = () => {
             placeholder="Enter user name or email"
             {...register("email")}
           />
-          {errors.email && <p className="text-red-500/50  text-sm absolute left-1 -bottom-5 italic">{ errors.email.message}</p>}
-          
+          {errors.email && (
+            <p className="text-red-500/50  text-sm absolute left-1 -bottom-5 italic">
+              {errors.email.message}
+            </p>
+          )}
         </div>
 
         <div className="flex flex-col mb-5 relative">
@@ -58,9 +68,11 @@ const SignUpForm = () => {
             placeholder="password"
             {...register("password")}
           />
-          { errors.password && <p className="text-red-500/50  text-sm absolute left-1 -bottom-5">{ 
-          errors.password.message}</p>
-}
+          {errors.password && (
+            <p className="text-red-500/50  text-sm absolute left-1 -bottom-5">
+              {errors.password.message}
+            </p>
+          )}
         </div>
       </section>
       <SecondaryButtonComponent Text="Login" />
@@ -68,4 +80,4 @@ const SignUpForm = () => {
   );
 };
 
-export default SignUpForm;
+export default SignInForm;

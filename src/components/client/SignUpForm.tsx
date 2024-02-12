@@ -4,11 +4,12 @@ import { SecondaryButtonComponent } from ".";
 import { useForm } from "react-hook-form";
 import { axiosInstance } from "@/axios-handlers";
 import { toast } from "sonner";
-import { signUpSchemaType } from "@/type";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signUpSchema } from "@/util/zod";
+import { signUpSchema, signUpSchemaType } from "@/util/zod";
+import { useRouter } from "next/navigation";
 
 const SignUpForm: React.FC = () => {
+	const router=useRouter()
 	const [passwordMatch, setPasswordMatch] = useState(false);
 	const {
 		register,
@@ -27,8 +28,9 @@ const SignUpForm: React.FC = () => {
 			} else {
 				reset();
         setPasswordMatch(false)
-				const response = await axiosInstance.post("/auth/signup", data);
+				const response = await axiosInstance.post("/auth/signup", {email:data.email,password:data.password});
 				toast.success(response.data.message);
+				router.push('/signin')
 			}
 		} catch (error: any) {
 			toast.error(error.message);
@@ -86,7 +88,12 @@ const SignUpForm: React.FC = () => {
 						type="Password"
 						placeholder="password"
 						{...register("confirmPassword")}
-					/>
+						/>
+						{errors.confirmPassword && (
+							<p className="text-red-500/50  text-sm absolute -bottom-5 left-1">
+								{errors.confirmPassword.message}
+							</p>
+						)}
 					{passwordMatch && (
 						<p className="text-red-500/50  text-sm absolute -bottom-5 left-1">
 							Password do not match

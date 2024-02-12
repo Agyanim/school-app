@@ -11,4 +11,3 @@ interface CreateAccountType{
     confirmPassword: string
 }
 
-type signUpSchemaType=z.infer<typeof signupSchema>

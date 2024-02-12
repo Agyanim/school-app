@@ -1,38 +1,37 @@
 import { NextRequest, NextResponse } from "next/server";
 import { validatePassword } from "@/util/password";
-import { getUserByName } from "@/services/userServices";
-import { NextApiRequest } from "next";
+import { getUserByEmail } from "@/services/userServices";
 
 // login enpoint
-export const POST = async (request: NextApiRequest) => {
+export const POST = async (request: NextRequest) => {
   try {
-    let { userName, password } = await request.body;
-
-    // checking if username and password are provided
-    if (!userName || !password) {
-      return NextResponse.json("Username and password are required",{status:200});
-    }
-    userName=userName.toLowerCase()
     
+    const { email, password } = await request.json();
+
+    // checking if email and password are provided
+    if (!email || !password) {
+      return NextResponse.json({success:false,message:"email and password are required"});
+    }    
     // fetching user using using name
-    const user = await getUserByName(userName);
-    // checking if username exist
-    if (!user[0]) {
-      return NextResponse.json("Sorry, user not found",{status:404});
+    const user = await getUserByEmail(email);  
+    console.log(user);
+     
+    // checking if email exist
+    if (!user) {
+      return NextResponse.json({success:false,message:"Sorry, user not found"});
     }
     // validating password if user exist
-    const validatedPassword = validatePassword(password, user[0].password);
-    // console.log(validatedPassword);
-
+    const validatedPassword = validatePassword(password, user.password);
     if (!validatedPassword) {
-      return NextResponse.json("Password do not much!. Try again.",{status:200});
+      return NextResponse.json({success:false,message:"validation fialed"});
     }
     // sending response to client after password validation
     return NextResponse.json({
       success: true,
       message: "User loged in successfully",
+      user:user
     },{status:200});
   } catch (error: any) {
-    return NextResponse.json(error.message,{status:501});
+    return NextResponse.json({error:error.message},{status:501});
   }
 };

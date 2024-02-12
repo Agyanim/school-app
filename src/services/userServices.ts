@@ -49,12 +49,13 @@ export const getUserByName = async (userName: string) => {
   return await selectByNameFunction(sql, userName);
 };
 export const getUserByEmail = async (email: string) => {
-  const user = await prismaClient.user.findUnique({
+   const user= await prismaClient.user.findUnique({
     where: {
       email: email,
     },
+    
   });
-  return user;
+  return user
 };
 
 export const deleteUserById = async (userId: number) => {
