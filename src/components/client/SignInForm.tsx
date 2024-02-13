@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signInSchema, signInSchemaType } from "@/util/zod";
 import { useRouter } from "next/navigation";
+import { myTest } from "@/util/jwt";
 
 const SignInForm = () => {
   const router = useRouter();
@@ -20,18 +21,20 @@ const SignInForm = () => {
   });
 
   const onClickHandler = async (data: signInSchemaType) => {
+    // myTest()
     try {
       const response = await axiosInstance.post("auth/login", data);
       if (!response.data.user) {
         toast.error(response.data.message);
       } else {
-        toast.success(response.data.message);
-        console.log(data);
+        // toast.success(response.data.message);
         router.push("/");
+        console.log(data);
       }
     } catch (error: any) {
       toast.error(error.message);
     }
+    
   };
   return (
     <form

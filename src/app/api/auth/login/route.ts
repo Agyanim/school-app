@@ -1,9 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { validatePassword } from "@/util/password";
 import { getUserByEmail } from "@/services/userServices";
+import { myTest } from "@/util/jwt";
 
 // login enpoint
 export const POST = async (request: NextRequest) => {
+  console.log("test");
+  
+  myTest()
   try {
     
     const { email, password } = await request.json();
