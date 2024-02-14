@@ -5,7 +5,6 @@ import { registerAccessToken, registerRefreshToken } from "@/util/jwt";
 
 // login enpoint
 export const POST = async (request: NextRequest) => {
-  
   try {
     
     const { email, password } = await request.json();
@@ -26,10 +25,11 @@ export const POST = async (request: NextRequest) => {
     if (!validatedPassword) {
       return NextResponse.json({success:false,message:"validation fialed"});
     }
+    // Generation accessToken
     const token=  registerAccessToken(email)
-    console.log('accesstoken',token);
+    // console.log('accesstoken',token);
+    // Generating refreshToken
     const refreshToken=registerRefreshToken(email)
-    console.log('refreshtoken',refreshToken);
     
     // sending response to client after password validation
     return NextResponse.json({

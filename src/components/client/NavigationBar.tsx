@@ -11,7 +11,7 @@ const NavigationBar = () => {
     <nav className="flex w-screen justify-center items-center my-5">
       <div className="flex w-[90%] justify-between items-center">
         <div className="w-[10rem] lg:w-[12rem] flex gap-2 relative">
-          <Image src={Logo} alt="earth-logo" className="w-[40px]  lg:w-[5rem] h-[40px] lg:h-[5rem]"/>
+          <Image src={Logo} width={80} height={80} alt="earth-logo" className="w-[40px]  lg:w-[5rem] h-[40px] lg:h-[5rem]"/>
           <h1 className="italic absolute bottom-3 left-14 text-transparent lg:text-xl text-sm px-2 font-extrabold bg-clip-text bg-gradient-to-r from-pink-600 to bg-orange-600 ">
             Earth app
           </h1>
