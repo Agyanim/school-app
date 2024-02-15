@@ -4,7 +4,7 @@ import React from "react";
 
 const SingUpPage = () => {
   return (
-    <main className="flex justify-center items-center w-screen flex-col max-h-[30rem]">
+    <main className="flex justify-center items-center w-screen flex-col h-[100vh]">
       <SignUpForm />
       <p className="ml-[-13%]">
         Already have an account?

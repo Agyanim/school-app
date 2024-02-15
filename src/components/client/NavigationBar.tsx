@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 const NavigationBar = () => {
   const router = usePathname();
   return (
-    <nav className="flex w-screen justify-center items-center my-5">
+    <nav className="flex w-full justify-center items-center my-5">
       <div className="flex w-[90%] justify-between items-center">
         <div className="w-[10rem] lg:w-[12rem] flex gap-2 relative">
           <Image src={Logo} width={80} height={80} alt="earth-logo" className="w-[40px]  lg:w-[5rem] h-[40px] lg:h-[5rem]"/>

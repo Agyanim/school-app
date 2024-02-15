@@ -21,7 +21,6 @@ export default function RootLayout({
     <html lang="en">
       <body  className={inter.className}>
         <Providers>
-          <NavigationBar />
           {children}
           <Toaster richColors position="top-right" />
           <ReactQueryDevtools />

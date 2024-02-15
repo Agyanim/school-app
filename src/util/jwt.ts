@@ -1,12 +1,9 @@
-import jwt, { JwtPayload } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import { jwtVerify,SignJWT } from "jose";
-import dotenv from "dotenv";
 import { cookies } from "next/headers";
-import { NextRequest } from "next/server";
 
-// dotenv.config();
-const accessTokenSecret = process.env.JWT_SECRET || "hjuwiADSEWFGG";
-const refreshTokenSecret = process.env.JWT_REFRESH_SECRET || "SGIEhfu7867f";
+const accessTokenSecretKey = process.env.JWT_SECRET ||'';
+const refreshTokenSecretKey = process.env.JWT_REFRESH_SECRET || "";
 
 interface userJwtPayload{
   jti:string
@@ -17,7 +14,7 @@ export const registerAccessToken = (email: string) => {
     email: email,
   };
   try {
-    const token = jwt.sign(payload, accessTokenSecret, { expiresIn: "1m" });
+    const token = jwt.sign(payload, accessTokenSecretKey, { expiresIn: "1m" });
     cookies().set({
       name: "token",
       value: token,
@@ -32,14 +29,14 @@ export const registerRefreshToken = (email: string) => {
     email: email,
   };
   try {
-    const token = jwt.sign(payload, refreshTokenSecret, { expiresIn: "7days" });
+    const token = jwt.sign(payload, refreshTokenSecretKey, { expiresIn: "7days" });
     return token;
   } catch (error: any) {
-    console.log(error.message);
+    throw new Error(error.message);
   }
 };
 export const getJwtSecret=()=>{
-  const accessTokenSecret = process.env.JWT_SECRET || "hjuwiADSEWFGG";
+  const accessTokenSecret = accessTokenSecretKey;
   return accessTokenSecret
 }
 export const verifyAccessToken = async ( accessToken: string) => {
@@ -54,9 +51,9 @@ export const verifyAccessToken = async ( accessToken: string) => {
 
 export const verifyRefreshToken = (accessToken: string) => {
   try {
-    const payload = jwt.verify(accessToken, refreshTokenSecret);
+    const payload = jwt.verify(accessToken, refreshTokenSecretKey);
     return payload;
   } catch (error: any) {
-    console.log(error.message);
+    throw new Error(error.message);
   }
 };
