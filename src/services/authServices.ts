@@ -1,15 +1,13 @@
 import { verifyAccessToken } from "@/util/jwt";
 
 export const isLogedIn = async (accessToken: string) => {
-    try {
-        const payload = await verifyAccessToken(accessToken);
-        console.log(payload);
-      //   if (payload) {
-      //     return true;
-      //   }
-        
-    } catch (error:any) {
-        console.log(error.message);
-        
+  try {
+    const payload = accessToken && (await verifyAccessToken(accessToken));    
+    if (payload) {
+      return true;
     }
+    else return false
+  } catch (error: any) {
+    return false
+  }
 };

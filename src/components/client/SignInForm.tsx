@@ -20,15 +20,13 @@ const SignInForm = () => {
   });
 
   const onClickHandler = async (data: signInSchemaType) => {
-    // myTest()
     try {
       const response = await axiosInstance.post("auth/login", data);
       if (!response.data.user) {
         toast.error(response.data.message);
       } else {
-        // toast.success(response.data.message);
-        router.push("/");
-        console.log(data);
+        toast.success(response.data.message);
+        router.push("/dashboard");
       }
     } catch (error: any) {
       toast.error(error.message);
