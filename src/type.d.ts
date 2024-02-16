@@ -1,4 +1,3 @@
-import { z } from "zod"
 
 interface UserType{
     user: string

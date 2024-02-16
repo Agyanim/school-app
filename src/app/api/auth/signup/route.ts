@@ -9,6 +9,8 @@ import { NextRequest, NextResponse } from "next/server";
 export const POST = async (request: NextRequest) => {
   try {
     const { email, password } = await request.json();
+    console.log(email);
+    
     if (!email || !password) {
       return NextResponse.json({
         message: "UserName and password must be provided!",
@@ -24,6 +26,11 @@ export const POST = async (request: NextRequest) => {
     const value = {
       email: email,
       password: encodePassword,
+      profile:{
+        create:{
+          userName:'Eric'
+        }
+      }
     };
     const user = await createUser(value);
     const newUser = {
@@ -32,14 +39,18 @@ export const POST = async (request: NextRequest) => {
       createdAt: user.createdAt,
       refreshToken: user.refreshToken,
     };
-    const userProfile = await createUserProfile(user.id);
-    console.log(userProfile);
+    console.log(user);
+    
+    // const userProfile = await createUserProfile(user.id);
+    // console.log(userProfile);
     const { password: newPassword, ...rest } = user;
     return NextResponse.json(
       { success: true, message: "User created successfully.", user: newUser },
       { status: 200 }
     );
   } catch (error: any) {
+    console.log(error.message);
+    
     return NextResponse.json({ error: error.message });
   }
 };
