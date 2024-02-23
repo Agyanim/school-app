@@ -12,36 +12,30 @@ import prisma from "@/db/prismaClient";
 const prismaClient = prisma;
 
 export const createUser = async (values: any) => {
-    const user= await prismaClient.user.create({
+    return await prismaClient.user.create({
         data:values
-    })
-  return user;
+    },
+    )
 };
 export const createUserProfile = async (userId: number) => {
-    const userProfile= await prismaClient.profile.create({
+    return await prismaClient.profile.create({
         data:{
           userId:userId
         }
     })
-  return userProfile;
 };
 // feching all users service/controller
 export const getUsers = async () => {
-  const users = await prismaClient.user.findMany();
-  // const sql="SELECT userId,userName FROM userTable"
-  // return await selectFunction(sql)
-  return users;
+  return await prismaClient.user.findMany();
+  
 };
 // fetching user using user  id
 export const getUserById = async (userId: number) => {
-  const user = await prismaClient.user.findUnique({
+  return await prismaClient.user.findUnique({
     where: {
       id: userId,
     },
   });
-  return user;
-  // const sql=`SELECT userId,userName FROM userTable WHERE userid=$1`
-  // return await selectByIdFunction(sql,userId)
 };
 // fetching user using username
 export const getUserByName = async (userName: string) => {
