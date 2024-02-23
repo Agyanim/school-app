@@ -4,12 +4,12 @@ import {
   selectByNameFunction,
   deleteByIdFunction,
   updateFunction,
-  insertFunction,
 } from "@/db/sqlFunctions";
-import { PrismaClient } from "@prisma/client";
+// import { PrismaClient } from "@prisma/client";
+import prisma from "@/db/prismaClient";
 // creating a user
 
-const prismaClient = new PrismaClient();
+const prismaClient = prisma;
 
 export const createUser = async (values: any) => {
     const user= await prismaClient.user.create({
