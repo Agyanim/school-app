@@ -14,7 +14,7 @@ export const registerAccessToken = (email: string) => {
 		email: email,
 	};
 	try {
-		const token = jwt.sign(payload, accessTokenSecretKey, { expiresIn: "1m" });
+		const token = jwt.sign(payload, accessTokenSecretKey, { expiresIn: "7days" });
 		cookies().set({
 			name: "token",
 			value: token,

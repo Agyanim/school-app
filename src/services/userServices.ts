@@ -1,6 +1,4 @@
 import {
-  selectByIdFunction,
-  selectFunction,
   selectByNameFunction,
   deleteByIdFunction,
   updateFunction,

@@ -13,6 +13,9 @@ export const middleware = async (request: NextRequest) => {
     if (!logedIn) {
       return NextResponse.redirect(new URL("/signin", url));
     }
+    if (logedIn && url.pathname=='/dashboard'){
+      return null
+    }
     return NextResponse.next();
   } catch (error: any) {
     return NextResponse.json({ error: error.message });
