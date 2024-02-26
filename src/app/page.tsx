@@ -5,7 +5,7 @@ export default async function Home() {
 	return (
 		<>
 			<NavigationBar />
-			<main className=" h-screen relative w-full">
+			<main className=" h-[100dvh] relative w-full">
 				<section className="h-full">
 					<div className="rounded">
 						<Image

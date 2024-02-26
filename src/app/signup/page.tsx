@@ -4,7 +4,7 @@ import React from "react";
 
 const SingUpPage = () => {
   return (
-    <main className="flex justify-center items-center w-screen flex-col h-[100vh]">
+    <main className="flex justify-center items-center w-screen flex-col h-[100dvh]">
       <h1 className="text-transparent bg-clip-text text-3xl font-extrabold bg-gradient-to-r from-orange-600 to-pink-600">SignUp</h1>
       <SignUpForm />
       <p className="ml-[-13%]">
