@@ -22,7 +22,7 @@ const NavigationBar = () => {
               <Link
                 className={
                   router == "/"
-                    ? " border-b-2 border-b-gray-300 pb-1"
+                    ? " border-b-2 border-b-orange-800/80 pb-1"
                     : "border-none"
                 }
                 href="/"
@@ -34,7 +34,7 @@ const NavigationBar = () => {
               <Link
                 className={
                   router == "/about"
-                    ? "border-b-2 border-b-gray-300 pb-1"
+                    ? "border-b-2 border-b-orange-800/80 pb-1"
                     : "border-none"
                 }
                 href="/about"
@@ -46,7 +46,7 @@ const NavigationBar = () => {
               <Link
                 className={
                   router == "/contact"
-                    ? " border-b-2 border-b-gray-300 pb-1 "
+                    ? " border-b-2 border-b-orange-800/80 pb-1 "
                     : "border-none"
                 }
                 href="/contact"
