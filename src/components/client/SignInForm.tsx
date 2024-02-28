@@ -14,7 +14,6 @@ const SignInForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<signInSchemaType>({
     resolver: zodResolver(signInSchema),
   });
