@@ -3,4 +3,6 @@ import { PrimaryButton } from "./buttons/PrimaryButton";
 import NavigationBar from "./NavigationBar";
 import SignInForm from "./SignInForm";
 import { SecondaryButtonComponent } from "./buttons/SecondaryButtonComponent";
-export { SignUpForm, PrimaryButton, NavigationBar, SignInForm,SecondaryButtonComponent };
+import UploadPhoto from "./user/UploadPhoto";
+export { SignUpForm, PrimaryButton, NavigationBar, SignInForm,SecondaryButtonComponent,UploadPhoto };
+

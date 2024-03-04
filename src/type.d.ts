@@ -1,3 +1,4 @@
+import { SetStateAction } from "react"
 
 interface UserType{
     user: string
@@ -10,3 +11,11 @@ interface CreateAccountType{
     confirmPassword: string
 }
 
+interface UploadPhotoReducerType{
+    file:File|null,
+    profileImage:String,
+    selectedImage:String
+    setFile:SetStateAction
+
+
+}

@@ -1,74 +1,37 @@
-"use client";
-import { axiosInstance } from "@/axios-handlers";
-import axios from "axios";
-import { readFileSync } from "fs";
-import { readFile } from "fs/promises";
-import { url } from "inspector";
-import { GetServerSideProps } from "next";
-import Image from "next/image";
-import path from "path";
-import React, { ChangeEvent, FormEvent, useState } from "react";
-import fs from "fs";
-
-interface Props {
-  dirs: string[];
-}
+import Link from "next/link";
 
 const ProfilePage = () => {
-  const [file, setFile] = useState<File>();
-  const [profileIMage, setProfileImage] = useState("");
-  const [selectedIMage, setSelectedImage] = useState("");
-
-  const onChangeHanlder = (e: any) => {
-    const file = e.target.files?.[0];
-    setSelectedImage(URL.createObjectURL(file));
-    setFile(file);
-  };
-  const uploadProfileImage = async (e: FormEvent) => {
-    e.preventDefault();
-    if (!file) return;
-    try {
-      const formData = new FormData();
-      formData.set("file", file);
-      const res = await fetch("/api/dashboard/upload", {
-        method: "post",
-        body: formData,
-      });
-      const data = await res.json();
-      setProfileImage(data.imageUrl);
-    } catch (error: any) {
-      console.log(error.message);
-    }
-  };
   return (
-    <div>
-      <form onSubmit={uploadProfileImage}>
-          {selectedIMage && (
-            <div className="w-[7rem] h-[7rem]">
-              <img className="w-full h-full" src={selectedIMage}  alt="profile" />
-            </div>
-          )}
-        <label className="border border-blue-600" htmlFor="profileImage">
-        <input
-          type="file"
-          name="profileImage"
-          id="profileImage"
-          hidden={true}
-          onChange={onChangeHanlder}
+    <main className="flex flex-col items-center w-f ">
+      <h1 className="my-[2rem] text-2xl text-orange-800 font-bold">
+        User Profile
+      </h1>
+      <section>
+        <img
+          className="w-[8rem] h-[10rem] rounded mb-[2rem]"
+          src="/upload/background-image.jpeg"
+          alt="profile-image"
         />
-       Select Photo
-        </label>
-        <br />
-        <button type="submit">Send</button>
-      </form>
-      {profileIMage && (
-        <div>
-          <img src={profileIMage} alt="text" />
-        </div>
-      )}
-
-      <div></div>
-    </div>
+      </section>
+      <section className="flex flex-col gap-5 font-bold items-center text-orange-900 text-lg">
+        <p>
+          UserName: <span className="font-normal ml-2">agyanim</span>{" "}
+        </p>
+        <p>
+          First Name: <span className="font-normal ml-2">Gideon</span>{" "}
+        </p>
+        <p>
+          Last Name: <span className="font-normal ml-2">Okai Boateng</span>{" "}
+        </p>
+        <p>
+          Email: <span className="font-normal ml-2">agyanim@yahoo.com</span>{" "}
+        </p>
+        <p>
+          Phone: <span className="font-normal ml-2">0246793987</span>{" "}
+        </p>
+      </section>
+      <Link href='/dashboard/profile/update' className="text-blue-600 font-bold mt-5">Edit</Link>
+    </main>
   );
 };
 
