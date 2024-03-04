@@ -10,3 +10,8 @@ interface CreateAccountType{
     confirmPassword: string
 }
 
+interface UploadPhotoReducerType{
+    file:File|null,
+    profileImage:String,
+    selectedImage:String
+}

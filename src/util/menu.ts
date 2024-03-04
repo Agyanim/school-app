@@ -9,6 +9,7 @@ import { TbReport } from "react-icons/tb";
 import { PiMicrosoftTeamsLogoBold } from "react-icons/pi";
 import { IoSettingsOutline } from "react-icons/io5";
 import { FaHandsHelping, FaRegUserCircle } from "react-icons/fa";
+import { ImProfile } from "react-icons/im";
 
 export const pageMenuList = [
 	{
@@ -63,6 +64,11 @@ export const pageMenuList = [
 				title: "Settings",
 				path: "/dashboard/settings",
 				icon: IoSettingsOutline,
+			},
+			{
+				title: "Profile",
+				path: "/dashboard/profile/",
+				icon: ImProfile,
 			},
 			{
 				title: "Help",
