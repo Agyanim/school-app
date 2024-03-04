@@ -22,11 +22,11 @@ const SignInForm = () => {
     try {
       const response = await axiosInstance.post("auth/login", data);
       if (!response.data.user) {
-        toast.error(response.data.message);
-      } else {
+        return  toast.error(response.data.message);
+      }
         toast.success(response.data.message);
         router.push("/dashboard");
-      }
+      
     } catch (error: any) {
       toast.error(error.message);
     }

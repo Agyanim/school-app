@@ -34,11 +34,6 @@ const ProfilePage = () => {
         method: "post",
         body: formData,
       });
-      // if (!res) return;
-      // const response = await fetch("/api/dashboard/upload", {
-      //   method: "get",
-      // });
-      // if (!response) return;
       const data = await res.json();
       setProfileImage(data.imageUrl);
     } catch (error: any) {
@@ -48,20 +43,24 @@ const ProfilePage = () => {
   return (
     <div>
       <form onSubmit={uploadProfileImage}>
+          {selectedIMage && (
+            <div className="w-[7rem] h-[7rem]">
+              <img className="w-full h-full" src={selectedIMage}  alt="profile" />
+            </div>
+          )}
+        <label className="border border-blue-600" htmlFor="profileImage">
         <input
           type="file"
           name="profileImage"
           id="profileImage"
+          hidden={true}
           onChange={onChangeHanlder}
         />
+       Select Photo
+        </label>
         <br />
         <button type="submit">Send</button>
       </form>
-      {selectedIMage && (
-        <div>
-          <img src={selectedIMage} width={100} height={100} alt="profile" />
-        </div>
-      )}
       {profileIMage && (
         <div>
           <img src={profileIMage} alt="text" />
