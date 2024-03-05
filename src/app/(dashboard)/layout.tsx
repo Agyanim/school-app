@@ -10,7 +10,9 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       <Sidebar />
       <section className="w-[79%] mt-5">
         <Navbar />
-        <UploadProfileImageContextProvider>{children}</UploadProfileImageContextProvider>
+        <UploadProfileImageContextProvider>
+          {children}
+        </UploadProfileImageContextProvider>
       </section>
     </main>
   );

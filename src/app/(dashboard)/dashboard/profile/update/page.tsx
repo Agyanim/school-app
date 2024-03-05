@@ -5,7 +5,15 @@ import { UseUploadProfileImageContext } from "@/context/UploadImageContext";
 
 
 const UpdateUserProfile = () => {
-  const {profileImage}=UseUploadProfileImageContext()
+  const {
+    file,
+    selectedImage,
+    profileImage,
+  } = UseUploadProfileImageContext();
+  // console.log(file);
+  // console.log(selectedImage);
+  // console.log(profileImage);
+  
   return (
     <div>
       <UploadPhoto/>

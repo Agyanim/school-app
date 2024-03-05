@@ -15,7 +15,11 @@ interface UploadPhotoReducerType{
     file:File|null,
     profileImage:String,
     selectedImage:String
-    setFile:SetStateAction
+    setFile:(file)=>void
+    setProfileImage:(file)=>void
+    setSelectedImage:(file)=>void
+    count:number
+    setCount:()=>void
 
 
 }

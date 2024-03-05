@@ -1,45 +1,70 @@
 "use client";
 import {
-    uploadActions,
-	uploadPhotoReducer,
-	uploadPhotoReducerInitialState,
+  uploadActions,
+  uploadPhotoReducer,
+  uploadPhotoReducerInitialState,
 } from "@/reducer/uploadPhontoReducer";
 import { UploadPhotoReducerType } from "@/type";
 import { createContext, useContext, useReducer, useState } from "react";
 
 const UploadProfileImageContext = createContext<UploadPhotoReducerType>(
-	uploadPhotoReducerInitialState
+  uploadPhotoReducerInitialState
 );
 
 export const UploadProfileImageContextProvider = ({
-	children,
+  children,
 }: {
-	children: React.ReactNode;
+  children: React.ReactNode;
 }) => {
-	const UploadProfileImageContext = createContext<UploadPhotoReducerType>(
-		uploadPhotoReducerInitialState
-	);
-	const [state, dispatch] = useReducer(
-		uploadPhotoReducer,
-		uploadPhotoReducerInitialState
-	);
+  const UploadProfileImageContext = createContext<UploadPhotoReducerType>(
+    uploadPhotoReducerInitialState
+  );
+  const [state, dispatch] = useReducer(
+    uploadPhotoReducer,
+    uploadPhotoReducerInitialState
+  );
 
-    const setFile=(file:File)=>{
-        dispatch({type:'setFile',payload:file})
-    }
-	const values = {
-		file: state.file,
-		profileImage: state.profileImage,
-		selectedImage: state.selectedImage,
-        setFile
-	};
-	return (
-		<UploadProfileImageContext.Provider value={values}>
-			{children}
-		</UploadProfileImageContext.Provider>
-	);
+  const setCount = () => {
+    console.log("set count");
+
+    dispatch({
+      type: uploadActions.SETCOUNT,
+      payload: undefined,
+    });
+  };
+
+
+  const setFile = (file: string) => {
+    dispatch({ type: uploadActions.SETFILE, payload: { file } });
+  };
+
+  const setProfileImage = (file: string) => {
+    dispatch({ type: uploadActions.SETFILE, payload: { file } });
+  };
+  const setSelectedImage = (file: string) => {
+    dispatch({ type: uploadActions.SETFILE, payload: { file } });
+  };
+  const values = {
+    file: state.file,
+    profileImage: state.profileImage,
+    selectedImage: state.selectedImage,
+    setFile,
+    setProfileImage,
+    setSelectedImage,
+    setCount:setCount,
+    count: state.count,
+  };
+  return (
+    <UploadProfileImageContext.Provider value={values}>
+      {children}
+    </UploadProfileImageContext.Provider>
+  );
 };
 
-export const UseUploadProfileImageContext = () => {
-	return useContext(UploadProfileImageContext);
+export const UseUploadProfileImageContext = (): UploadPhotoReducerType => {
+  const context = useContext(UploadProfileImageContext);
+  if (!context) {
+    throw Error("error occured");
+  }
+  return context;
 };
