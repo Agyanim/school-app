@@ -9,13 +9,10 @@ export const uploadPhotoReducerInitialState: UploadPhotoReducerType = {
   setFile: (file) => {},
   setProfileImage: (file) => {},
   setSelectedImage: (file) => {},
-  count: 0,
-  setCount() {},
+  count: 1,
+  setCount:()=>{}
 };
 
-// interface Action {
-//   type: "setFile" | "setProfileImage" | "setSelectedImage" | "setCount";
-// }
 
 export enum uploadActions {
   SETFILE = "setFile",
@@ -38,6 +35,7 @@ export const uploadPhotoReducer = (
       return { ...state, selectedImage: action.payload };
 
     case uploadActions.SETCOUNT:
+      console.log("set account");
       return { ...state, count: state.count + 1 };
 
     default:

@@ -26,7 +26,7 @@ const Sidebar = () => {
 				<div className="text-white w-full">
 					{pageMenuList.map((menu) => {
 						return (
-							<div className="mb-8 w-full">
+							<div key={menu.title} className="mb-8 w-full">
 								<h1 className="">{menu.title}</h1>
 								{menu.list.map((menu) => (
 									<MenuList Menu={menu} />

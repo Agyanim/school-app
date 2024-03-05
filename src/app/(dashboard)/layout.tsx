@@ -1,5 +1,4 @@
 import { Navbar, Sidebar } from "@/components/client/dashboard";
-import { UploadProfileImageContextProvider } from "@/context/UploadImageContext";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -10,9 +9,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       <Sidebar />
       <section className="w-[79%] mt-5">
         <Navbar />
-        <UploadProfileImageContextProvider>
           {children}
-        </UploadProfileImageContextProvider>
       </section>
     </main>
   );

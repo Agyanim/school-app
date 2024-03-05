@@ -16,9 +16,9 @@ const MenuList = ({ Menu }: MenuPropType) => {
 	const router = usePathname();
 
 	return (
-			<ul className="flex flex-col  text-sm w-full">
-				<li className={ router==Menu.path? " w-[90%] bg-slate-900/50 p-3":" w-[90%] hover:bg-slate-900/50 p-3 my-1 border-none"} key={Menu.title}>
-					<Link
+			<ul key={Menu.title} className="flex flex-col  text-sm w-full">
+				<li  className={ router==Menu.path? " w-[90%] bg-slate-900/50 p-3":" w-[90%] hover:bg-slate-900/50 p-3 my-1 border-none"} key={Menu.title}>
+					<Link key={Menu.title}
 						className="flex justify-start items-center gap-2"
 						href={Menu.path}
 					>

@@ -4,7 +4,7 @@ import "./globals.css";
 import { Toaster } from "sonner";
 import { Providers } from "@/providers/Providers";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { NavigationBar } from "@/components/client";
+import { UploadProfileImageContextProvider } from "@/context/UploadImageContext";
 
 const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
@@ -20,11 +20,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body  className={inter.className}>
+      <UploadProfileImageContextProvider>
         <Providers>
           {children}
           <Toaster richColors position="top-right" />
           <ReactQueryDevtools />
         </Providers>
+        </UploadProfileImageContextProvider>
+
       </body>
     </html>
   );

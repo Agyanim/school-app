@@ -26,7 +26,6 @@ export const UploadProfileImageContextProvider = ({
 
   const setCount = () => {
     console.log("set count");
-
     dispatch({
       type: uploadActions.SETCOUNT,
       payload: undefined,
@@ -44,7 +43,7 @@ export const UploadProfileImageContextProvider = ({
   const setSelectedImage = (file: string) => {
     dispatch({ type: uploadActions.SETFILE, payload: { file } });
   };
-  const values = {
+  const values:UploadPhotoReducerType = {
     file: state.file,
     profileImage: state.profileImage,
     selectedImage: state.selectedImage,
@@ -64,7 +63,7 @@ export const UploadProfileImageContextProvider = ({
 export const UseUploadProfileImageContext = (): UploadPhotoReducerType => {
   const context = useContext(UploadProfileImageContext);
   if (!context) {
-    throw Error("error occured");
+    throw new Error("error occured");
   }
   return context;
 };

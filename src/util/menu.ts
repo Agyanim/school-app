@@ -88,14 +88,14 @@ export const cardItems = [
 		icon: FaRegUserCircle,
 	},
 	{
-		title: "Total User",
+		title: "Total Products",
 		figure: 10928,
 		percentage: 12,
 		remarks: "more than previous week",
 		icon: FaRegUserCircle,
 	},
 	{
-		title: "Total User",
+		title: "Total Items",
 		figure: 10928,
 		percentage: 12,
 		remarks: "more than previous week",
