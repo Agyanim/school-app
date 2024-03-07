@@ -3,22 +3,22 @@ import React from "react";
 import { UploadPhoto } from "@/components/client";
 import { UseUploadProfileImageContext } from "@/context/UploadImageContext";
 
-
 const UpdateUserProfile = () => {
-  const {
-    file,
-    selectedImage,
-    profileImage,
-  } = UseUploadProfileImageContext();
-  // console.log(file);
-  // console.log(selectedImage);
-  // console.log(profileImage);
-  
+  const { selectedImage, profileImage } = UseUploadProfileImageContext();
   return (
-    <div>
-      <UploadPhoto/>
-      <h1>{profileImage}</h1>
-    </div>
+    <main>
+      <section>
+        <div>
+          {/* {selectedImage ? (
+            <img src={selectedImage} alt="selected Image" />
+          ) : (
+            <div className="w-[2rem] h-[2rem] bg-orange-700"></div>
+          )} */}
+        </div>
+      </section>
+      {/* <img src={profileImage} alt="profile image" /> */}
+      <UploadPhoto />
+    </main>
   );
 };
 

@@ -16,9 +16,6 @@ export const UploadProfileImageContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const UploadProfileImageContext = createContext<UploadPhotoReducerType>(
-    uploadPhotoReducerInitialState
-  );
   const [state, dispatch] = useReducer(
     uploadPhotoReducer,
     uploadPhotoReducerInitialState
@@ -34,14 +31,13 @@ export const UploadProfileImageContextProvider = ({
 
 
   const setFile = (file: string) => {
-    dispatch({ type: uploadActions.SETFILE, payload: { file } });
+    dispatch({ type: uploadActions.SETFILE, payload: file });
   };
-
-  const setProfileImage = (file: string) => {
-    dispatch({ type: uploadActions.SETFILE, payload: { file } });
+  const setProfileImage = (profileImage: string) => {
+    dispatch({ type: uploadActions.SETPROFILEIMAGE, payload: profileImage  });
   };
-  const setSelectedImage = (file: string) => {
-    dispatch({ type: uploadActions.SETFILE, payload: { file } });
+  const setSelectedImage = (selectedIMage: string) => {    
+    dispatch({ type: uploadActions.SETSELECTEDIMAGE, payload:selectedIMage  });
   };
   const values:UploadPhotoReducerType = {
     file: state.file,
@@ -50,8 +46,6 @@ export const UploadProfileImageContextProvider = ({
     setFile,
     setProfileImage,
     setSelectedImage,
-    setCount:setCount,
-    count: state.count,
   };
   return (
     <UploadProfileImageContext.Provider value={values}>

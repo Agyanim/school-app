@@ -13,13 +13,11 @@ interface CreateAccountType{
 
 interface UploadPhotoReducerType{
     file:File|null,
-    profileImage:String,
-    selectedImage:String
+    profileImage:string,
+    selectedImage:string
     setFile:(file)=>void
     setProfileImage:(file)=>void
     setSelectedImage:(file)=>void
-    count:number
-    setCount:()=>void
 
 
 }
