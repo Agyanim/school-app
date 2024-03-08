@@ -7,6 +7,7 @@ import { AiOutlineLogout } from "react-icons/ai";
 import MenuList from "./MenuList";
 
 const Sidebar = () => {
+	
 	return (
 		<section className="bg-gradient-to-r from-orange-800 to-pink-800 w-[20%] shadow-slate-950 sticky shadow-inner">
 			<div className="flex flex-col items-start mt-10 ml-5 gap-10">

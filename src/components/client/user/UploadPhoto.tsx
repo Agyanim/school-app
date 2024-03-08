@@ -34,11 +34,12 @@ const UploadPhoto = () => {
   return (
     <div className="mt-10">
       <form
-        className="w-[9rem]  flex flex-col gap-4"
+        className="w-[9rem]  flex flex-col gap-4 "
         onSubmit={uploadProfileImage}
       >
+        <div className="rounded-lg">
         <label
-          className="flex justify-center items-center bg-gray-400/20  h-[10rem] rounded hover:cursor-pointer"
+          className="flex justify-center items-center bg-gray-400/20 h-[10rem] hover:cursor-pointer"
           htmlFor="profileImage"
         >
           {selectedImage ? (
@@ -60,6 +61,7 @@ const UploadPhoto = () => {
             onChange={onChangeHanlder}
           />
         </label>
+        </div>
         <button
           className="bg-gradient-to-r from-orange-600 to-pink-600 border-none hover:bg-gradient-to-l rounded py-2 px-3 text-white font-bold"
           type="submit"

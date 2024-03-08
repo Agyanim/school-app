@@ -9,7 +9,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       <Sidebar />
       <section className="w-[79%] mt-5">
         <Navbar />
-          {children}
+        {children}
       </section>
     </main>
   );

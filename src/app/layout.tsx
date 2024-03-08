@@ -19,15 +19,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body  className={inter.className}>
-      <UploadProfileImageContextProvider>
-        <Providers>
-          {children}
-          <Toaster richColors position="top-right" />
-          <ReactQueryDevtools />
-        </Providers>
+      <body className={inter.className}>
+        <UploadProfileImageContextProvider>
+          <Providers>
+            {children}
+            <Toaster richColors position="top-right" />
+          </Providers>
         </UploadProfileImageContextProvider>
-
       </body>
     </html>
   );
