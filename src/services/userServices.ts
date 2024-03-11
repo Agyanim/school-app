@@ -24,7 +24,24 @@ export const createUserProfile = async (userId: number) => {
 };
 // feching all users service/controller
 export const getUsers = async () => {
-  return await prismaClient.user.findMany();
+  return await prismaClient.user.findMany({
+    select:{
+      id:true,
+      email:true,
+      password:false,
+      createdAt:true,
+      profile:{
+        select:{
+          userName:true,
+          firstName:true,
+          lastName:true,
+          phone:true
+
+        }
+      }
+    },
+  
+  });
   
 };
 // fetching user using user  id

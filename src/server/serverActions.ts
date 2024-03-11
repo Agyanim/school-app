@@ -1,6 +1,6 @@
 "use client"
 
-import { getRequest } from "@/axios-handlers/axiosHandler"
+import { getRequest } from "@/axios-handlers/userHandlers"
 import { toast } from "sonner"
 
 export const getUser= async()=>{
