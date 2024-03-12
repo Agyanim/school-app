@@ -10,7 +10,7 @@ export const POST = async (request: NextRequest) => {
   try {
     const { email, password } = await request.json();
     console.log(email);
-    
+
     if (!email || !password) {
       return NextResponse.json({
         message: "UserName and password must be provided!",
@@ -26,11 +26,9 @@ export const POST = async (request: NextRequest) => {
     const value = {
       email: email,
       password: encodePassword,
-      profile:{
-        create:{
-          userName:'Eric'
-        }
-      }
+      profile: {
+        create: {},
+      },
     };
     const user = await createUser(value);
     const newUser = {
@@ -40,7 +38,7 @@ export const POST = async (request: NextRequest) => {
       refreshToken: user.refreshToken,
     };
     console.log(user);
-    
+
     // const userProfile = await createUserProfile(user.id);
     // console.log(userProfile);
     const { password: newPassword, ...rest } = user;
@@ -50,7 +48,7 @@ export const POST = async (request: NextRequest) => {
     );
   } catch (error: any) {
     console.log(error.message);
-    
+
     return NextResponse.json({ error: error.message });
   }
 };

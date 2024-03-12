@@ -30,7 +30,7 @@ const Sidebar = () => {
 							<div key={menu.title} className="mb-8 w-full">
 								<h1 className="">{menu.title}</h1>
 								{menu.list.map((menu) => (
-									<MenuList Menu={menu} />
+									<MenuList key={menu.title} Menu={menu} />
 								))}
 							</div>
 						);

@@ -1,5 +1,6 @@
 import { toast } from "sonner";
 import { axiosInstance } from ".";
+import { UserType } from "@/type";
 
 export async function getUsersHandler() {
   try {
