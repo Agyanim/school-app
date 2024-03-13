@@ -23,33 +23,39 @@ export const createUserProfile = async (userId: number) => {
     })
 };
 // feching all users service/controller
-export const getUsers = async () => {
+export const getUsersService = async () => {
   return await prismaClient.user.findMany({
     select:{
       id:true,
       email:true,
       password:false,
       createdAt:true,
-      profile:{
-        select:{
-          userName:true,
-          firstName:true,
-          lastName:true,
-          phone:true
-
-        }
-      }
     },
   
   });
   
 };
 // fetching user using user  id
-export const getUserById = async (userId: number) => {
+export const getUserByIdService = async (userId: number) => {
   return await prismaClient.user.findUnique({
     where: {
       id: userId,
     },
+    select:{
+      id:true,
+      email:true,
+      createdAt:true,
+      profile:{
+        select:{
+          userName:true,
+          firstName:true,
+          lastName:true,
+          imageUrl:true,
+          phone:true
+
+        }
+      }
+    }
   });
 };
 // fetching user using username

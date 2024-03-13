@@ -1,12 +1,13 @@
 import React from 'react'
-
-const userProfilePage = ({params}:{params:string}) => {
-// const userId:string=params
-console.log(params);
-
+interface paramsType{
+  params:{
+    userId:string
+  }
+}
+const userProfilePage = ({params}:paramsType) => {
   
   return (
-    <div>userProfilePage</div>
+    <div>userProfilePage{params.userId}</div>
   )
 }
 
