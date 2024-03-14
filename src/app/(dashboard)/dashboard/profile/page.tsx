@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const ProfilePage = () => {
   return (
-    <main className="flex flex-col items-center w-f ">
+    <main className="flex flex-col items-center ">
       <h1 className="my-[2rem] text-2xl text-orange-800 font-bold">
         User Profile
       </h1>
