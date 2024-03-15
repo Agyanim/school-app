@@ -1,7 +1,8 @@
 "use client";
+import { UseUploadProfileImageContext } from "@/context/UploadImageContext";
 import { getUserByIdQuery, getUsersQuery } from "@/query-handlers/userQueries";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 interface paramsType {
   params: {
     userId: string;
@@ -10,6 +11,11 @@ interface paramsType {
 const userProfilePage = ({ params }: paramsType) => {
   const { userId } = params;
   const { data, isLoading } = getUserByIdQuery(userId);
+  const { setUserId } = UseUploadProfileImageContext();
+
+  useEffect(() => {
+    setUserId(userId);
+  }, [userId]);
 
   return (
     <main className="">
@@ -21,7 +27,13 @@ const userProfilePage = ({ params }: paramsType) => {
             User Profile
           </h1>
           <section>
-            {data?.user.profile?.imageUrl || (
+            {(
+              <img
+                className="w-[8rem] h-[10rem] rounded mb-[2rem]"
+                src={data?.user?.profile?.imageUrl}
+                alt="profile-image"
+              />
+            ) || (
               <img
                 className="w-[8rem] h-[10rem] rounded mb-[2rem]"
                 src="/upload/background-image.jpeg"
@@ -33,34 +45,34 @@ const userProfilePage = ({ params }: paramsType) => {
             <p>
               UserName:
               <span className="font-normal ml-2">
-                {data?.user.profile?.userName}
+                {data?.user?.profile?.userName}
               </span>
             </p>
             <p>
               First Name:
               <span className="font-normal ml-2">
-                {data?.user.profile?.firstName}
+                {data?.user?.profile?.firstName}
               </span>
             </p>
             <p>
               Last Name:
               <span className="font-normal ml-2">
-                {data?.user.profile?.lastName}
+                {data?.user?.profile?.lastName}
               </span>
             </p>
             <p>
               Email:
-              <span className="font-normal ml-2">{data?.user.email}</span>{" "}
+              <span className="font-normal ml-2">{data?.user?.email}</span>
             </p>
             <p>
-              Phone:{" "}
+              Phone:
               <span className="font-normal ml-2">
-                {data?.user.profile?.phone || "0246793987"}
-              </span>{" "}
+                {data?.user?.profile?.phone || "0246793987"}
+              </span>
             </p>
           </section>
           <Link
-            href="/dashboard/profile/update"
+            href="/dashboard/users/profile/update"
             className="text-blue-600 font-bold mt-5"
           >
             Edit

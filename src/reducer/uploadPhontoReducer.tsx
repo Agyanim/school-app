@@ -6,9 +6,11 @@ export const uploadPhotoReducerInitialState: UploadPhotoReducerType = {
   file: null,
   profileImage: "profile image",
   selectedImage: "",
+  userId:"",
   setFile: (file) => {},
   setProfileImage: (file) => {},
   setSelectedImage: (file) => {},
+  setUserId() {},
 };
 
 
@@ -17,6 +19,7 @@ export enum uploadActions {
   SETPROFILEIMAGE = "setProfileImage",
   SETSELECTEDIMAGE = "setSelectedImage",
   SETCOUNT = "setCount",
+  SETUSERID='setUserId'
 }
 export const uploadPhotoReducer = (
   state: UploadPhotoReducerType,
@@ -33,6 +36,8 @@ export const uploadPhotoReducer = (
 
     case uploadActions.SETSELECTEDIMAGE:      
       return { ...state, selectedImage:payload.selectedImage };
+      case uploadActions.SETUSERID:
+        return {...state,userId:payload.userId}
 
     default:
       return state;

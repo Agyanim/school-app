@@ -3,7 +3,7 @@ import { UseUploadProfileImageContext } from "@/context/UploadImageContext";
 import React, { FormEvent } from "react";
 
 const UploadPhoto = () => {
-  const { setFile, file, setProfileImage, setSelectedImage, selectedImage } =
+  const { setFile, file, setProfileImage, setSelectedImage, selectedImage ,userId} =
     UseUploadProfileImageContext();
 
   const onChangeHanlder = (e: any) => {
@@ -18,11 +18,13 @@ const UploadPhoto = () => {
     e.preventDefault();
     if (!file) return;
     try {
+      // create a formdata to handle image and userid
       const formData = new FormData();
-      formData.set("file", file);
+      formData.append("file", file);
+      formData.append('userId',userId)
       const res = await fetch("/api/dashboard/upload", {
         method: "post",
-        body: formData,
+        body:formData,
       });
       const data = await res.json();
       setProfileImage({ profileImage: data.imageUrl });

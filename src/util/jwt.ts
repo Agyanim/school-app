@@ -14,14 +14,16 @@ export const registerAccessToken = (email: string) => {
 		email: email,
 	};
 	try {
-		const token = jwt.sign(payload, accessTokenSecretKey, { expiresIn: "7days" });
+		const token = jwt.sign(payload, accessTokenSecretKey, { expiresIn: "1day" });
 		cookies().set({
 			name: "token",
 			value: token,
 			httpOnly: true,
 		});
 		return token;
-	} catch (error: any) {}
+	} catch (error: any) {
+		throw new Error(error.message)
+	}
 };
 export const registerRefreshToken = (email: string) => {
 	const payload = {

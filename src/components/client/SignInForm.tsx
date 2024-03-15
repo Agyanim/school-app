@@ -7,9 +7,18 @@ import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signInSchema, signInSchemaType } from "@/util/zod";
 import { useRouter } from "next/navigation";
+import { UseUploadProfileImageContext } from "@/context/UploadImageContext";
+
+interface userType{
+  id:string
+  email:string
+
+}
 
 const SignInForm = () => {
   const router = useRouter();
+  const {setUserId,userId}=UseUploadProfileImageContext()
+
   const {
     register,
     handleSubmit,
@@ -24,12 +33,17 @@ const SignInForm = () => {
       if (!response.data.user) {
         return  toast.error(response.data.message);
       }
+      // console.log(response.data);
+      
+        setUserId(response.data.user.id)
         toast.success(response.data.message);
+        
         router.push("/dashboard");
       
     } catch (error: any) {
       toast.error(error.message);
     }
+    console.log('user:'+userId);
     
   };
   return (

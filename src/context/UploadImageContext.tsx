@@ -21,14 +21,9 @@ export const UploadProfileImageContextProvider = ({
     uploadPhotoReducerInitialState
   );
 
-  const setCount = () => {
-    console.log("set count");
-    dispatch({
-      type: uploadActions.SETCOUNT,
-      payload: undefined,
-    });
-  };
-
+const setUserId=(userId:string)=>{
+  dispatch({type:uploadActions.SETUSERID,payload:{userId}})
+}
 
   const setFile = (file: string) => {
     dispatch({ type: uploadActions.SETFILE, payload: file });
@@ -46,6 +41,8 @@ export const UploadProfileImageContextProvider = ({
     setFile,
     setProfileImage,
     setSelectedImage,
+    setUserId,
+    userId:state.userId
   };
   return (
     <UploadProfileImageContext.Provider value={values}>

@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { validatePassword } from "@/util/password";
-import { getUserByEmail } from "@/services/userServices";
+import { getUserByEmailService } from "@/services/userServices";
 import { registerAccessToken, registerRefreshToken } from "@/util/jwt";
+import { updateRefreshTokenService } from "@/services/authServices";
 
 // login enpoint
 export const POST = async (request: NextRequest) => {
@@ -14,7 +15,7 @@ export const POST = async (request: NextRequest) => {
       return NextResponse.json({success:false,message:"email and password are required"});
     }    
     // fetching user using using name
-    const user = await getUserByEmail(email);  
+    const user = await getUserByEmailService(email);  
     
     // checking if email exist
     if (!user) {
@@ -27,15 +28,17 @@ export const POST = async (request: NextRequest) => {
     }
     // Generation accessToken
     const token=  registerAccessToken(email)
-    // console.log('accesstoken',token);
-    // Generating refreshToken
     const refreshToken=registerRefreshToken(email)
-    
+    await updateRefreshTokenService(email,refreshToken)
     // sending response to client after password validation
     return NextResponse.json({
       success: true,
       message: "User loged in successfully",
-      user:user
+      user:{
+        id:user.id,
+        email:user.email
+      },
+      token
     },{status:200});
   } catch (error: any) {
     return NextResponse.json({error:error.message},{status:501});

@@ -3,7 +3,7 @@ import React from "react";
 import { UploadPhoto } from "@/components/client";
 import { UseUploadProfileImageContext } from "@/context/UploadImageContext";
 
-const UpdateUserProfile = () => {
+const UpdateProfilePage = () => {
   const { selectedImage, profileImage } = UseUploadProfileImageContext();
   return (
     <main>
@@ -12,4 +12,4 @@ const UpdateUserProfile = () => {
   );
 };
 
-export default UpdateUserProfile;
+export default UpdateProfilePage;

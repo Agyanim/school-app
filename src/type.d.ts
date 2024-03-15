@@ -18,6 +18,8 @@ interface UploadPhotoReducerType{
     setFile:(file)=>void
     setProfileImage:(file)=>void
     setSelectedImage:(file)=>void
+    userId:string
+    setUserId:(userid)=>void
 
 
 }
