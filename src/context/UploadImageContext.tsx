@@ -34,6 +34,10 @@ const setUserId=(userId:string)=>{
   const setSelectedImage = (selectedIMage: string) => {    
     dispatch({ type: uploadActions.SETSELECTEDIMAGE, payload:selectedIMage  });
   };
+
+  const setCurrentUserId=(currentUserId:string)=>{
+      dispatch({type:uploadActions.SETCURRENTUSERID,payload:{currentUserId}})
+  }
   const values:UploadPhotoReducerType = {
     file: state.file,
     profileImage: state.profileImage,
@@ -42,7 +46,9 @@ const setUserId=(userId:string)=>{
     setProfileImage,
     setSelectedImage,
     setUserId,
-    userId:state.userId
+    userId:state.userId,
+    currentUserId:state.currentUserId,
+    setCurrentUserId,
   };
   return (
     <UploadProfileImageContext.Provider value={values}>

@@ -17,7 +17,7 @@ interface userType{
 
 const SignInForm = () => {
   const router = useRouter();
-  const {setUserId,userId}=UseUploadProfileImageContext()
+  const {setCurrentUserId}=UseUploadProfileImageContext()
 
   const {
     register,
@@ -33,17 +33,17 @@ const SignInForm = () => {
       if (!response.data.user) {
         return  toast.error(response.data.message);
       }
-      // console.log(response.data);
+      // console.log(response.data?.user?.id);
       
-        setUserId(response.data.user.id)
-        toast.success(response.data.message);
+        setCurrentUserId(response.data?.user?.id)
+        toast.success(response.data?.message);
         
         router.push("/dashboard");
       
     } catch (error: any) {
       toast.error(error.message);
     }
-    console.log('user:'+userId);
+    // console.log('user:'+userId);
     
   };
   return (

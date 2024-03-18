@@ -43,3 +43,13 @@ getUserByIdQuery = (userId:string) => {
   });
   return { data, isLoading, status,error };
 };
+export const getCurrentUserByIdQuery = (currentUserId:string) => {
+  const { data, isLoading, status,error } = useQuery({
+    queryFn: async () => {
+      const data:UserType =await getUserByIdHandler(currentUserId);
+      return data
+    },
+    queryKey: ["currentUserId"],
+  });
+  return { data, isLoading, status,error };
+};

@@ -6,11 +6,13 @@ import { pageMenuList } from "@/util/menu";
 import { AiOutlineLogout } from "react-icons/ai";
 import MenuList from "./MenuList";
 import { UseUploadProfileImageContext } from "@/context/UploadImageContext";
-import { getUserByIdQuery } from "@/query-handlers/userQueries";
+import { getCurrentUserByIdQuery } from "@/query-handlers/userQueries";
 
 const Sidebar = () => {
-  const { userId } = UseUploadProfileImageContext();
-  const { data } = getUserByIdQuery(userId);
+  const {currentUserId } = UseUploadProfileImageContext();
+  const { data } = getCurrentUserByIdQuery(currentUserId);
+  // console.log(currentUserId);
+  
 
   return (
     <section className="bg-gradient-to-r from-orange-800 to-pink-800 w-[20%] shadow-slate-950 sticky shadow-inner">
