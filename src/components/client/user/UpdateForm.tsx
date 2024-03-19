@@ -24,7 +24,7 @@ const UpdateForm = () => {
           <label htmlFor="phone">Phone:</label>
           <input className='border border-grey-100 w-[90%] px-2 py-2' type="text" name="phone" id="phone" />
         </div>
-        <button className='bg-blue-500 w-[90%] py-3 rounded border-none' type='submit'> Update</button>
+        <button className='bg-gradient-to-r from-orange-600 to-pink-600 w-[90%] text-white font-bold py-3 rounded border-none hover:bg-gradient-to-l' type='submit'> Update</button>
       </form>
     </section>
   )
