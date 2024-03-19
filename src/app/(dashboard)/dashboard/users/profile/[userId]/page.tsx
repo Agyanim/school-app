@@ -27,13 +27,13 @@ const userProfilePage = ({ params }: paramsType) => {
             User Profile
           </h1>
           <section>
-            {(
+            {data?.user?.profile?.imageUrl?(
               <img
                 className="w-[8rem] h-[10rem] rounded mb-[2rem]"
                 src={data?.user?.profile?.imageUrl}
                 alt="profile-image"
               />
-            ) || (
+            ) : (
               <img
                 className="w-[8rem] h-[10rem] rounded mb-[2rem]"
                 src="/upload/background-image.jpeg"

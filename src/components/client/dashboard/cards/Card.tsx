@@ -12,7 +12,7 @@ interface cardItemProps {
 }
 const Card = ({ cardItems }: cardItemProps) => {
 	return (
-		<div className="bg-gradient-to-r from-pink-600 to-orange-600 text-white py-3 pr-3 flex flex-col gap-2 pl-10 relative text-sm">
+		<div key={cardItems.title} className="bg-gradient-to-r from-pink-600 to-orange-600 text-white py-3 pr-3 flex flex-col gap-2 pl-10 relative text-sm">
       <div className="absolute left-3 top-[0.9rem]">
 
 				<cardItems.icon />
