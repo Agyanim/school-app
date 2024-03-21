@@ -11,12 +11,24 @@ interface paramsType {
 const userProfilePage = ({ params }: paramsType) => {
   const { userId } = params;
   const { data, isLoading } = getUserByIdQuery(userId);
-  const { setUserId } = UseUploadProfileImageContext();
+  const { setUserId,setUserProfile } = UseUploadProfileImageContext();
 
   useEffect(() => {
     setUserId(userId);
   }, [userId]);
 
+  if(data?.user?.profile){
+    const userProfile={
+      email:data?.user?.email,
+      userName:data?.user?.profile?.userName,
+      firstName:data?.user?.profile?.firstName,
+      lastName:data?.user?.profile?.lastName,
+      phone:data?.user?.profile?.phone,
+    }
+    console.log(userProfile);
+    
+    // setUserProfile({userProfile})
+  }
   return (
     <main className="">
       {isLoading ? (
@@ -72,7 +84,7 @@ const userProfilePage = ({ params }: paramsType) => {
             </p>
           </section>
           <Link
-            href="/dashboard/users/profile/update"
+            href={`/dashboard/users/profile/update/${userId}`}
             className="text-blue-600 font-bold mt-5"
           >
             Edit

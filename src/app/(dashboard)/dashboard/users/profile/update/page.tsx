@@ -5,7 +5,7 @@ const UpdateUserProfilePage = () => {
   return (
     <main>
         <section><UploadPhoto/></section>
-        <section><UpdateForm/></section>
+        {/* <section><UpdateForm/></section> */}
     </main>
   )
 }

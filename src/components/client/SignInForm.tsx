@@ -9,15 +9,14 @@ import { signInSchema, signInSchemaType } from "@/util/zod";
 import { useRouter } from "next/navigation";
 import { UseUploadProfileImageContext } from "@/context/UploadImageContext";
 
-interface userType{
-  id:string
-  email:string
-
+interface userType {
+  id: string;
+  email: string;
 }
 
 const SignInForm = () => {
   const router = useRouter();
-  const {setCurrentUserId}=UseUploadProfileImageContext()
+  const { setCurrentUserId } = UseUploadProfileImageContext();
 
   const {
     register,
@@ -31,20 +30,23 @@ const SignInForm = () => {
     try {
       const response = await axiosInstance.post("auth/login", data);
       if (!response.data.user) {
-        return  toast.error(response.data.message);
+        return toast.error(response.data.message);
       }
-      // console.log(response.data?.user?.id);
-      
-        setCurrentUserId(response.data?.user?.id)
-        toast.success(response.data?.message);
-        
-        router.push("/dashboard");
-      
+
+      setCurrentUserId(response.data?.user?.id);
+      if (typeof window !== 'undefined') {
+        window.localStorage.setItem(
+          "currentUserId",
+          JSON.stringify(response.data?.user?.id)
+        );
+      }
+      toast.success(response.data?.message);
+
+      router.push("/dashboard");
     } catch (error: any) {
       toast.error(error.message);
     }
     // console.log('user:'+userId);
-    
   };
   return (
     <form

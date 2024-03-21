@@ -7,9 +7,19 @@ import {
 import { UploadPhotoReducerType } from "@/type";
 import { createContext, useContext, useReducer, useState } from "react";
 
+
+interface UserProfiletype{
+  userName:string
+  firstName:string
+  lastName:string
+  email:string
+  phone:string
+
+}
 const UploadProfileImageContext = createContext<UploadPhotoReducerType>(
   uploadPhotoReducerInitialState
 );
+
 
 export const UploadProfileImageContextProvider = ({
   children,
@@ -38,6 +48,10 @@ const setUserId=(userId:string)=>{
   const setCurrentUserId=(currentUserId:string)=>{
       dispatch({type:uploadActions.SETCURRENTUSERID,payload:{currentUserId}})
   }
+
+  const setUserProfile=(userProfile:UserProfiletype)=>{
+    dispatch({type:uploadActions.SETUSERPROFILE,payload:{userProfile}})
+  }
   const values:UploadPhotoReducerType = {
     file: state.file,
     profileImage: state.profileImage,
@@ -49,6 +63,8 @@ const setUserId=(userId:string)=>{
     userId:state.userId,
     currentUserId:state.currentUserId,
     setCurrentUserId,
+    setUserProfile,
+    userProfile:state.userProfile
   };
   return (
     <UploadProfileImageContext.Provider value={values}>

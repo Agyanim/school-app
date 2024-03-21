@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import ProfileImage from "../../../../../public/images/gid.png";
 import { pageMenuList } from "@/util/menu";
@@ -7,29 +7,28 @@ import { AiOutlineLogout } from "react-icons/ai";
 import MenuList from "./MenuList";
 import { UseUploadProfileImageContext } from "@/context/UploadImageContext";
 import { getCurrentUserByIdQuery } from "@/query-handlers/userQueries";
-import { url } from "inspector";
 
 const Sidebar = () => {
   const { currentUserId } = UseUploadProfileImageContext();
-  if (currentUserId) {
-    localStorage.setItem("currentUserId", JSON.stringify(currentUserId));
-  }
-  let userId: string = localStorage.getItem("currentUserId") || currentUserId;
-  if (userId) {
-    userId = JSON.parse(userId);
-  }
-  const { data } = getCurrentUserByIdQuery(userId);
+  const [userId, setUserId] = useState<string>(currentUserId);
+  useEffect(() => {
+    const userId =
+      window.localStorage.getItem("currentUserId") || currentUserId;
+    setUserId(userId);
+  }),
+    [userId];
 
-  // console.log(userId);
+  const { data } = getCurrentUserByIdQuery(userId);
 
   return (
     <section className="bg-gradient-to-r from-orange-800 to-pink-800 w-[20%] shadow-slate-950 sticky shadow-inner">
       <div className="flex flex-col items-start mt-10 ml-5 gap-10">
         <div className="flex gap-2 items-center w-full ">
           {data?.user?.profile?.imageUrl ? (
-            <div style={{
-            }} className="w-[6rem]  h-[6rem] p-2  overflow-hidden flex items-center justify-center">
-              
+            <div
+              style={{}}
+              className="w-[6rem]  h-[6rem] p-2  overflow-hidden flex items-center justify-center"
+            >
               <Image
                 className="rounded-[50%] "
                 src={data?.user?.profile?.imageUrl}
