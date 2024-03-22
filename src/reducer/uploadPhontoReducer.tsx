@@ -15,11 +15,13 @@ export const uploadPhotoReducerInitialState: UploadPhotoReducerType = {
   setCurrentUserId() {},
   setUserProfile() {},
   userProfile: {
+    userId:"",
     userName: "",
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
+    imageUrl:''
   },
 };
 

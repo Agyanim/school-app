@@ -12,6 +12,7 @@ interface UserType{
     email:string
     createdAt:Date
     profile:{
+      userId:string
       userName:string
       firstName:string
       lastName:string

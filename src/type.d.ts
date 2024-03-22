@@ -22,12 +22,25 @@ interface UploadPhotoReducerType{
     setUserId:(userid)=>void
     currentUserId:string
     setCurrentUserId:(currentUserId)=>void
-    setUserProfile:(userId)=>void
+    setUserProfile:(userProfile)=>void
     userProfile:{
-        userName:string
-        firstName:string
-        lastName:string
+        userId:string
+        userName?:string
+        firstName?:string
+        lastName?:string
         email:string
-        phone:string
+        phone?:string
+        imageUrl:string
     }
 }
+interface UserProfiletype{
+    userId:string
+    userName:string
+    firstName:string
+    lastName:string
+    email:string
+    phone:string
+    imageUrl:string
+  
+  }
+  

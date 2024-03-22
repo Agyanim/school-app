@@ -5,15 +5,20 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 
 const UpdateForm = ({ userId }: { userId: string }) => {
   const { userProfile } = UseUploadProfileImageContext();
+  
   const [profile, setProfile] = useState(userProfile);
-
+  
+  // useEffect(()=>{
+  //   setProfile(userProfile)
+  // },[])
+  
   const onChangeHandler = (e: any) => {
     const {name,value}=e.target
-    // const value=e.target.value
-    console.log(name, value);
-  };
 
-  console.log(profile.email);
+    // const value=e.target.value
+    // console.log(name, value);
+  };
+  console.log(profile);
 
   return (
     <section className="w-full mt-10">
@@ -40,7 +45,7 @@ const UpdateForm = ({ userId }: { userId: string }) => {
             type="text"
             name="firstname"
             id="firstname"
-            value={profile?.firstName}
+            value={userProfile.firstName}
             onChange={onChangeHandler}
           />
         </div>
@@ -53,7 +58,7 @@ const UpdateForm = ({ userId }: { userId: string }) => {
             type="text"
             name="lastN"
             id="lastName"
-            value={profile.lastName}
+            value={userProfile.lastName}
             onChange={onChangeHandler}
           />
         </div>
@@ -66,7 +71,7 @@ const UpdateForm = ({ userId }: { userId: string }) => {
             type="emal"
             name="email"
             id="email"
-            value={profile.email}
+            value={userProfile.email}
             // disabled={true}
             onChange={onChangeHandler}
           />
@@ -80,7 +85,7 @@ const UpdateForm = ({ userId }: { userId: string }) => {
             type="text"
             name="phone"
             id="phone"
-            // value={userProfile.phone}
+            value={userProfile.phone}
             onChange={onChangeHandler}
           />
         </div>

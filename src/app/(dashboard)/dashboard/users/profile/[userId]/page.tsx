@@ -1,8 +1,8 @@
 "use client";
 import { UseUploadProfileImageContext } from "@/context/UploadImageContext";
 import { getUserByIdQuery, getUsersQuery } from "@/query-handlers/userQueries";
-import Link from "next/link";
 import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
 interface paramsType {
   params: {
     userId: string;
@@ -11,24 +11,26 @@ interface paramsType {
 const userProfilePage = ({ params }: paramsType) => {
   const { userId } = params;
   const { data, isLoading } = getUserByIdQuery(userId);
-  const { setUserId,setUserProfile } = UseUploadProfileImageContext();
-
+  const { setUserId, setUserProfile } = UseUploadProfileImageContext();
+  const router = useRouter();
   useEffect(() => {
     setUserId(userId);
   }, [userId]);
 
-  if(data?.user?.profile){
-    const userProfile={
-      email:data?.user?.email,
-      userName:data?.user?.profile?.userName,
-      firstName:data?.user?.profile?.firstName,
-      lastName:data?.user?.profile?.lastName,
-      phone:data?.user?.profile?.phone,
-    }
-    console.log(userProfile);
-    
-    // setUserProfile({userProfile})
-  }
+  const editHandler = () => {
+    data?.user?.profile;
+    const userProfile = {
+      userId:data?.user.id,
+      userName: data?.user?.profile?.userName||'',
+      firstName: data?.user?.profile?.firstName||'',
+      lastName: data?.user?.profile?.lastName ||"",
+      email: data?.user?.email,
+      phone: data?.user?.profile?.phone||'',
+      imageUrl:data?.user?.profile?.imageUrl||''
+    };
+    setUserProfile({ userProfile:data?.user.profile });
+    router.push(`/dashboard/users/profile/update/${userId}`);
+  };
   return (
     <main className="">
       {isLoading ? (
@@ -39,7 +41,7 @@ const userProfilePage = ({ params }: paramsType) => {
             User Profile
           </h1>
           <section>
-            {data?.user?.profile?.imageUrl?(
+            {data?.user?.profile?.imageUrl ? (
               <img
                 className="w-[8rem] h-[10rem] rounded mb-[2rem]"
                 src={data?.user?.profile?.imageUrl}
@@ -83,12 +85,7 @@ const userProfilePage = ({ params }: paramsType) => {
               </span>
             </p>
           </section>
-          <Link
-            href={`/dashboard/users/profile/update/${userId}`}
-            className="text-blue-600 font-bold mt-5"
-          >
-            Edit
-          </Link>
+          <button className="text-blue-600 font-bold mt-5" onClick={editHandler}>Edit</button>
         </div>
       )}
     </main>

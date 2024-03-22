@@ -4,18 +4,10 @@ import {
   uploadPhotoReducer,
   uploadPhotoReducerInitialState,
 } from "@/reducer/uploadPhontoReducer";
-import { UploadPhotoReducerType } from "@/type";
+import { UploadPhotoReducerType, UserProfiletype } from "@/type";
 import { createContext, useContext, useReducer, useState } from "react";
 
 
-interface UserProfiletype{
-  userName:string
-  firstName:string
-  lastName:string
-  email:string
-  phone:string
-
-}
 const UploadProfileImageContext = createContext<UploadPhotoReducerType>(
   uploadPhotoReducerInitialState
 );
