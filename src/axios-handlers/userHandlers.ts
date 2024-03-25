@@ -21,6 +21,15 @@ export const getUserByIdHandler = async (userId: string) => {
   }
 };
 
+export const updateUserHandler=async(userId: string,data:any)=>{
+  try {
+    const result= await axiosInstance.put(`/dashboard/update/${userId}`,{data})
+  return result
+  } catch (error:any) {
+    console.log(error.message)
+  }
+}
+
 export async function postRequest(endpoint: string, data: UserType) {
   try {
     return await axiosInstance.post(endpoint, data);

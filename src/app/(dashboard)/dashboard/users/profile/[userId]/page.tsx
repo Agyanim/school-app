@@ -28,7 +28,7 @@ const userProfilePage = ({ params }: paramsType) => {
       phone: data?.user?.profile?.phone||'',
       imageUrl:data?.user?.profile?.imageUrl||''
     };
-    setUserProfile({ userProfile:data?.user.profile });
+    setUserProfile(userProfile);
     router.push(`/dashboard/users/profile/update/${userId}`);
   };
   return (

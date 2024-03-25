@@ -21,7 +21,7 @@ export const uploadPhotoReducerInitialState: UploadPhotoReducerType = {
     lastName: "",
     email: "",
     phone: "",
-    imageUrl:''
+    imageUrl:"",
   },
 };
 
@@ -54,7 +54,7 @@ export const uploadPhotoReducer = (
       return { ...state, currentUserId: payload.currentUserId };
 
     case uploadActions.SETUSERPROFILE:
-      return{...state,userProfile:payload.userProfile}
+      return{...state,userProfile:payload}
     default:
       return state;
   }

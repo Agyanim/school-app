@@ -1,8 +1,10 @@
 import {
   getUserByIdHandler,
   getUsersHandler,
+  updateUserHandler,
 } from "@/axios-handlers/userHandlers";
-import { useQuery } from "@tanstack/react-query";
+import { UserProfiletype } from "@/type";
+import { useQuery,useMutation } from "@tanstack/react-query";
 
 
 interface UserType{
@@ -54,3 +56,12 @@ export const getCurrentUserByIdQuery = (currentUserId:string) => {
   });
   return { data, isLoading, status,error };
 };
+
+export const updateUserQueryHandler=(userId:string)=>{
+  const {mutate,isPending,data,isSuccess}=useMutation({
+    mutationFn:async(data:UserProfiletype)=>{
+      return await updateUserHandler(userId,data)
+    }
+  })
+  return {mutate,isPending,data,isSuccess}
+}

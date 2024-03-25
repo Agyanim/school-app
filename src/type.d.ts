@@ -35,12 +35,12 @@ interface UploadPhotoReducerType{
 }
 interface UserProfiletype{
     userId:string
-    userName:string
-    firstName:string
-    lastName:string
+    userName?:string|undefined
+    firstName?:string|undefined
+    lastName?:string|undefined
     email:string
-    phone:string
-    imageUrl:string
+    phone?:string|undefined
+    imageUrl?:string|undefined
   
   }
   

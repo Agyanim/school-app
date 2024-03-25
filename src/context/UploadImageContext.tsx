@@ -42,7 +42,7 @@ const setUserId=(userId:string)=>{
   }
 
   const setUserProfile=(userProfile:UserProfiletype)=>{
-    dispatch({type:uploadActions.SETUSERPROFILE,payload:{userProfile}})
+    dispatch({type:uploadActions.SETUSERPROFILE,payload:userProfile})
   }
   const values:UploadPhotoReducerType = {
     file: state.file,
