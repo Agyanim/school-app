@@ -23,7 +23,7 @@ export const getUserByIdHandler = async (userId: string) => {
 
 export const updateUserHandler=async(userId: string,data:any)=>{
   try {
-    const result= await axiosInstance.put(`/dashboard/update/${userId}`,{data})
+    const result= await axiosInstance.put(`/dashboard/users/update/${userId}`,{data})
   return result
   } catch (error:any) {
     console.log(error.message)

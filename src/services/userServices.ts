@@ -6,10 +6,12 @@ import {
 // import { PrismaClient } from "@prisma/client";
 import prisma from "@/db/prismaClient";
 import { TbCoinRupee } from "react-icons/tb";
+import { UserProfiletype } from "@/type";
 // creating a user
 
 const prismaClient = prisma;
 interface userType{
+  refreshToken: any;
   id:number
   email:string
   password:string
@@ -18,6 +20,7 @@ interface userType{
 export const createUser = async (values: any) => {
   const user:userType= await prismaClient.user.create({
     data: values,
+ 
   });
   return user
 };
@@ -51,6 +54,7 @@ export const getUserByIdService = async (userId: number) => {
       createdAt: true,
       profile: {
         select: {
+          userId:true,
           userName: true,
           firstName: true,
           lastName: true,
@@ -93,6 +97,21 @@ export const updateProfileIMageUrlService = async (
     },
   });
 };
+
+export const updateProfileService=async(userId:number,profile:UserProfiletype)=>{
+  return await prismaClient.profile.update({
+    where:{
+      userId
+    },
+    data:{
+      userName:profile.userName,
+      firstName:profile.firstName,
+      lastName:profile.lastName,
+      phone:profile.phone
+    }
+  })
+
+}
 
 // fetching user using username
 // export const getUserByName = async (userName: string) => {

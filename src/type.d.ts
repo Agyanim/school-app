@@ -3,6 +3,7 @@ import { SetStateAction } from "react"
 interface UserType{
     user: string
     password: string
+    refreshToken:string
 }
 
 interface CreateAccountType{
@@ -24,7 +25,7 @@ interface UploadPhotoReducerType{
     setCurrentUserId:(currentUserId)=>void
     setUserProfile:(userProfile)=>void
     userProfile:{
-        userId:string
+        userId:number
         userName?:string
         firstName?:string
         lastName?:string
@@ -34,13 +35,13 @@ interface UploadPhotoReducerType{
     }
 }
 interface UserProfiletype{
-    userId:string
-    userName?:string|undefined
-    firstName?:string|undefined
-    lastName?:string|undefined
-    email:string
-    phone?:string|undefined
-    imageUrl?:string|undefined
+    userId?:number
+    userName?:string|undefined|null
+    firstName?:string|undefined|null
+    lastName?:string|undefined|null
+    email?:string
+    phone?:string|undefined|null
+    imageUrl?:string|undefined|null
   
   }
   

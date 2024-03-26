@@ -1,7 +1,6 @@
 import {
   createUser,
-  createUserProfile,
-  getUserByEmail,
+  getUserByEmailService,
 } from "@/services/userServices";
 import { hashPassword } from "@/util/password";
 import { NextRequest, NextResponse } from "next/server";
@@ -17,7 +16,7 @@ export const POST = async (request: NextRequest) => {
       });
     }
 
-    const existingUser = await getUserByEmail(email);
+    const existingUser = await getUserByEmailService(email);
     if (existingUser) {
       return NextResponse.json({ message: "username already taken." });
     }
@@ -27,7 +26,8 @@ export const POST = async (request: NextRequest) => {
       email: email,
       password: encodePassword,
       profile: {
-        create: {},
+        create: {
+        },
       },
     };
     const user = await createUser(value);
@@ -37,10 +37,8 @@ export const POST = async (request: NextRequest) => {
       createdAt: user.createdAt,
       refreshToken: user.refreshToken,
     };
-    console.log(user);
+    // console.log(user);
 
-    // const userProfile = await createUserProfile(user.id);
-    // console.log(userProfile);
     const { password: newPassword, ...rest } = user;
     return NextResponse.json(
       { success: true, message: "User created successfully.", user: newUser },

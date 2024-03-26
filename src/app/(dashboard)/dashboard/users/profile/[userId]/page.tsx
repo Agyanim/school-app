@@ -20,7 +20,7 @@ const userProfilePage = ({ params }: paramsType) => {
   const editHandler = () => {
     data?.user?.profile;
     const userProfile = {
-      userId:data?.user.id,
+      userId:data?.user?.id,
       userName: data?.user?.profile?.userName||'',
       firstName: data?.user?.profile?.firstName||'',
       lastName: data?.user?.profile?.lastName ||"",
