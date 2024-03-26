@@ -44,7 +44,7 @@ export const PUT = async (
         Number(userId), profile      );
       console.log(updatedProfile);
 
-      return NextResponse.json({ succuss: true });
+      return NextResponse.json({ succuss: true ,profile:updatedProfile});
     
     
   } catch (error: any) {
