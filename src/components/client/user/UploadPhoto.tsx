@@ -1,10 +1,12 @@
 "use client";
 import { UseUploadProfileImageContext } from "@/context/UploadImageContext";
+import { getUserByIdQuery } from "@/query-handlers/userQueries";
 import React, { FormEvent } from "react";
 
 const UploadPhoto = () => {
-  const { setFile, file, setProfileImage, setSelectedImage, selectedImage ,userId} =
+  const {  setFile, file, setProfileImage, setSelectedImage, selectedImage ,userId} =
     UseUploadProfileImageContext();
+    const { data, isLoading } = getUserByIdQuery(userId)
 
   const onChangeHanlder = (e: any) => {
     const newFile = e.target.files?.[0];
@@ -51,10 +53,17 @@ const UploadPhoto = () => {
               alt="selected image"
             />
           ) : (
-            <p className="h-[6rem] w-[4rem] flex justify-center items-center text-orange-700 font-bold ">
+                        <p className="h-[6rem] w-[4rem] flex justify-center items-center text-orange-700 font-bold ">
               Select Image
+              {/* <img
+              className="h-full w-full"
+              src={data?.user?.profile?.imageUrl}
+              alt="selected image"
+            /> */}
             </p>
-          )}
+          )
+          
+          }
           <input
             type="file"
             name="profileImage"

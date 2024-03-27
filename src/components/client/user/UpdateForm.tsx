@@ -1,18 +1,14 @@
 "use client";
-import { getUserByIdHandler, updateUserHandler } from "@/axios-handlers/userHandlers";
 import { UseUploadProfileImageContext } from "@/context/UploadImageContext";
-import React, { ChangeEvent, EventHandler, useEffect, useState } from "react";
+import React, {useEffect, useState } from "react";
 import { updateUserQueryHandler } from "@/query-handlers/userQueries";
-import { SubmitHandler } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 const UpdateForm = ({ userId }: { userId: string }) => {
   const { userProfile } = UseUploadProfileImageContext();
-  
+  const navigate=useRouter()
   const [profile, setProfile] = useState(userProfile);
   const {mutate,data,isSuccess}=updateUserQueryHandler(userId)
-  console.log(isSuccess);
-  
-  console.log(data);
   
   useEffect(()=>{
     setProfile(userProfile)
@@ -27,6 +23,7 @@ const UpdateForm = ({ userId }: { userId: string }) => {
   const updateHandler=(e:any)=>{
     e.preventDefault()
     mutate(profile)
+    navigate.back()
   }
   return (
     <section className="w-full mt-10">

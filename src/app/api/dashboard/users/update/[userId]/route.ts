@@ -1,4 +1,5 @@
 import {
+  createUserProfile,
   getUserByIdService,
   updateProfileService,
 } from "@/services/userServices";
@@ -22,31 +23,45 @@ export const PUT = async (
       return NextResponse.json({ success: false, message: "No user found" });
     }
 
+    const body = await request.json();
+    const data: UserProfiletype = body.data;
     const profile = user?.profile;
-    if(profile==null)return 
-      const body = await request.json();
-      const data: UserProfiletype = body.data;
-
+    if(profile==null){
+     const profile= await createUserProfile(Number(userId))
+     data.firstName !== undefined
+     ? (profile.firstName = data.firstName)
+     : profile?.firstName;
+   data.lastName !== undefined
+     ? (profile.lastName = data.lastName)
+     : profile?.lastName;
+   data.phone !== undefined
+     ? (profile.phone = data.phone)
+     : profile?.userName;
+   data.userName !== undefined
+     ? (profile.userName = data.userName)
+     : profile?.phone;
+   const updatedProfile = await updateProfileService(
+     Number(userId), profile);
+  //  console.log(updatedProfile);
+   return NextResponse.json({ succuss: true ,profile:updatedProfile});  
+    }
       data.firstName !== undefined
-        ? (profile!.firstName = data.firstName)
+        ? (profile.firstName = data.firstName)
         : profile?.firstName;
       data.lastName !== undefined
-        ? (profile!.lastName = data.lastName)
+        ? (profile.lastName = data.lastName)
         : profile?.lastName;
       data.phone !== undefined
-        ? (profile!.phone = data.phone)
+        ? (profile.phone = data.phone)
         : profile?.userName;
       data.userName !== undefined
-        ? (profile!.userName = data.userName)
+        ? (profile.userName = data.userName)
         : profile?.phone;
 
       const updatedProfile = await updateProfileService(
-        Number(userId), profile      );
-      console.log(updatedProfile);
-
+        Number(userId), profile);
+      // console.log(updatedProfile);
       return NextResponse.json({ succuss: true ,profile:updatedProfile});
-    
-    
   } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message });
   }
